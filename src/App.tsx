@@ -1,12 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 
 function App() {
   return (
     <div>
-    	<div className="ui segment center aligned">
-    		<h3>UNDER CONSTRUCTION</h3>
-    	</div>
+    	<Router>
+
+			<NavBarComponent/>
+
+			<Switch>
+
+				<Route />
+
+			</Switch>
+		</Router>
     </div>
   );
 }
