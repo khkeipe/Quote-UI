@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 class NavBarComponent extends Component{
 	state = {};
-	handleItemClick = (e: any, { name }) => this.setState({activeItem: name}); 
+	handleItemClick = (e, { name }) => this.setState({activeItem: name}); 
 
 	render(){
 		return(
