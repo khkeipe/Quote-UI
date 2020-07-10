@@ -9,7 +9,7 @@ function App() {
     <div>
     	<Router>
 
-			{/* <NavBarComponent/> */}
+			<NavBarComponent/>
 
 			<Switch>
 
