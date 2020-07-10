@@ -4,7 +4,9 @@ const LoginComponent = () => {
 
 	return(
 		<>
-		
+			<div className="ui grid center aligned">
+				<button>Get Users</button>
+			</div>
 		</>
 	);
 }
