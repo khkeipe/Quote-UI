@@ -10,7 +10,8 @@ class NavBarComponent extends Component{
 
 		return(
 			<>
-				<Menu vertical>
+				<div>
+				<Menu vertical compact inverted borderless>
 					<Menu.Item>
 						<Menu.Header> Menu </Menu.Header>
 						<Menu.Menu>
@@ -20,8 +21,8 @@ class NavBarComponent extends Component{
 							onClick={this.handleItemClick} />
 						</Menu.Menu>
 					</Menu.Item>
-
 				</Menu>
+				</div>
 			
 			</>
 		);
