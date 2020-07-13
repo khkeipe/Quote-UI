@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 import App from '../src/App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
 
-ReactDOM.render(
-  <React.StrictMode>
+const store = configureStore();
+
+render(
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
-
-serviceWorker.unregister();
