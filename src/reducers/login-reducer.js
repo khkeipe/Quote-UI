@@ -12,7 +12,7 @@ export const loginReducer = (state = initialState, action) => {
 			return {
 				...state,
 				authUser: action.payload,
-				erroMessage: ''
+				errorMessage: ''
 			} 
 		case FAILED_INVALID_REQUEST:
 		case FAILED_BAD_REQUEST:
