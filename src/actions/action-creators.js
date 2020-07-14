@@ -3,10 +3,9 @@ import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_IN
 import { authenticate } from '../remote/auth-service';
 
 export const loginAction = (email, password) => async (dispatch) => {
- 
+	
 	try {
-	let authUser = authenticate(email, password);
-		console.log(authUser);
+	let authUser = await authenticate(email, password);
 	dispatch({
 		type: SUCCESSFUL_LOGIN,
 		payload: authUser
