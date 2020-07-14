@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
-	return { authUser: state.authUser }
+	return { authUser: state.loginReducer.authUser,
+			 errorMessage: state.loginReducer.errorMessage }
 };
 
 const mapDispatchToProps = {
@@ -16,7 +17,6 @@ const LoginComponent = (props) => {
 	
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
 
 	window.onkeypress = (event) => {
 		let key = event.key.toUpperCase();
@@ -33,17 +33,14 @@ const LoginComponent = (props) => {
 	}
 
 	async function login(){
-		try {
-			props.loginAction(email, password)
-		} catch (e) {
-			setErrorMessage(e.message);
-		}
+		props.loginAction(email, password)
 	}
 
 	return(
 		<>
-		{ !props.authUser ? <Redirect to='/quote'/> : 
+		{ props.authUser ? <Redirect to='/quote'/> : 
 		<> 
+			<h2>{props.authUser}</h2>
 			<Modal size="mini" 
 					trigger={
 					<Button>LOGIN</Button>
@@ -65,7 +62,7 @@ const LoginComponent = (props) => {
 							</Grid.Column>
 						</Grid>
 						
-						{errorMessage ? <Message negative>{errorMessage}</Message> : <></> }
+						{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
 					</Form>
 				</Modal.Content>
 			</Modal>
