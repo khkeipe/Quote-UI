@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 const getDealers = () => {
 
-	const dealers = {
+	// const dealers = {
 
-	}
+	// }
 }
 
 
@@ -14,7 +14,7 @@ const QuoteComponent = () => {
 	
 		return(
 			<>
-				<Form>
+				<Form className="container segment">
 					<Form.Field>
 						<label>First Name</label>
 						<input placeholder='First Name' />
