@@ -1,13 +1,22 @@
-import React from 'react';
-import { Modal, Button, Form, FormButton} from 'semantic-ui-react';
-import { authenticate } from '../../remote/auth-service';
+import React, { useState } from 'react';
+import { Modal, Button, Form, FormButton, Message, Grid } from 'semantic-ui-react';
+import { loginAction } from '../../actions/action-creators';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
+const mapStateToProps = (state) => {
+	return { authUser: state.authUser }
+};
 
+const mapDispatchToProps = {
+	loginAction
+}
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
 	
-	let email;
-	let password;
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	window.onkeypress = (event) => {
 		let key = event.key.toUpperCase();
@@ -16,40 +25,53 @@ const LoginComponent = () => {
 		}
 	}
 
-	async function login(email, password){
+	let updateEmail = (e) => {
+		setEmail(e.target.value);
+	}
+	let updatePassword = (e) => {
+		setPassword(e.target.value);
+	}
 
-		console.log(email);
-		console.log(password);
-		
+	async function login(){
 		try {
-			let response = authenticate(email, password);
-			console.log(response);
-			return response;
+			props.loginAction(email, password)
 		} catch (e) {
-	
+			setErrorMessage(e.message);
 		}
 	}
 
 	return(
 		<>
-			<Modal trigger={<Button>LOGIN</Button>} >
+		{ !props.authUser ? <Redirect to='/quote'/> : 
+		<> 
+			<Modal size="mini" 
+					trigger={
+					<Button>LOGIN</Button>
+					} >
 				<Modal.Header>LOGIN</Modal.Header>
 				<Modal.Content>
 					<Form>
 						<Form.Field>
 							<label>Email</label>
-							<input placeholder='Email' value={email} />
+							<input placeholder='Email' onChange={updateEmail} value={email}/>
 						</Form.Field>
 						<Form.Field>
 							<label>Password</label>
-							<input placeholder='Password' type='password' value={password}/>
+							<input placeholder='Password' type='password' onChange={updatePassword} value={password}/>
 						</Form.Field>
-						<FormButton type='submit' onClick={login}>LOGIN</FormButton>
+						<Grid>
+							<Grid.Column textAlign="center">
+								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
+							</Grid.Column>
+						</Grid>
+						
+						{errorMessage ? <Message negative>{errorMessage}</Message> : <></> }
 					</Form>
 				</Modal.Content>
 			</Modal>
+		</> }
 		</>
 	);
 }
 
-export default LoginComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
