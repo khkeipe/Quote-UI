@@ -38,19 +38,19 @@ const LoginComponent = (props) => {
 
 	return(
 		<>
-		{ props.authUser ? <Redirect to='/quote'/> : 
+		{ props.authUser ? <Redirect to='/home'/> : 
 		<> 
-			<h2>{props.authUser}</h2>
 			<Modal size="mini" 
-					trigger={
-					<Button>LOGIN</Button>
-					} >
+					trigger=
+					{<Button inverted>LOGIN</Button>}
+					>
 				<Modal.Header>LOGIN</Modal.Header>
 				<Modal.Content>
 					<Form>
 						<Form.Field>
-							<label>Email</label>
-							<input placeholder='Email' onChange={updateEmail} value={email}/>
+							<label>E-mail</label>
+							<input placeholder='E-mail Address' onChange={updateEmail} value={email}/>
+							<i user icon></i>
 						</Form.Field>
 						<Form.Field>
 							<label>Password</label>
