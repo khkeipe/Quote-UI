@@ -1,32 +1,35 @@
-import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import React from 'react';
+import { Menu, Segment, MenuMenu, Button } from 'semantic-ui-react';
+import LoginComponent from '../LoginComponent/LoginComponent';
+import { connect } from 'react-redux';
 
-class NavBarComponent extends Component{
-	state = {};
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name}); 
 
-	render(){
-		const { activeItem } = this.state
+const mapStateToProps = (state) => {
+	return { authUser: state.loginReducer.authUser,
+			 errorMessage: state.loginReducer.errorMessage }
+};
+
+const NavBarComponent = (props) => { 
 
 		return(
 			<>
-				<div>
-				<Menu vertical compact inverted borderless>
-					<Menu.Item>
-						<Menu.Header> Menu </Menu.Header>
-						<Menu.Menu>
-							<Menu.Item 
-							name='menu item 1' 
-							active={activeItem === 'menue item 1'} 
-							onClick={this.handleItemClick} />
-						</Menu.Menu>
-					</Menu.Item>
-				</Menu>
-				</div>
-			
+				 
+				
+				<Segment inverted>
+					<Menu inverted>
+						<MenuMenu position="right">
+						{ !props.authUser ? 
+							<>
+							<LoginComponent/>
+							</> :
+							<Button inverted> LOGOUT </Button>
+						}
+						</MenuMenu>
+					</Menu>
+				</Segment>
+				
 			</>
 		);
-	}
 }
 
-export default NavBarComponent;
+export default connect(mapStateToProps)(NavBarComponent);
