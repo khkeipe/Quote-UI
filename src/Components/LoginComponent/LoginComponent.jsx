@@ -38,7 +38,7 @@ const LoginComponent = (props) => {
 
 	return(
 		<>
-		{ props.authUser ? <Redirect to='/home'/> : 
+		{ props.authUser ? <Redirect to="/home"/> : 
 		<> 
 			<Modal size="mini" 
 					trigger=
