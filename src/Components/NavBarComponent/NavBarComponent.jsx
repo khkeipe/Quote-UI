@@ -1,7 +1,8 @@
 import React from 'react';
-import { Menu, Segment, MenuMenu, Button } from 'semantic-ui-react';
+import { Menu, Segment, MenuMenu, Button, MenuItem, Header } from 'semantic-ui-react';
 import LoginComponent from '../LoginComponent/LoginComponent';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const mapStateToProps = (state) => {
@@ -14,9 +15,12 @@ const NavBarComponent = (props) => {
 		return(
 			<>
 				 
-				
 				<Segment inverted>
 					<Menu inverted>
+						<MenuMenu position="left">
+						<Link to="/home"><Header inverted>HOME</Header></Link>
+
+						</MenuMenu>
 						<MenuMenu position="right">
 						{ !props.authUser ? 
 							<>
