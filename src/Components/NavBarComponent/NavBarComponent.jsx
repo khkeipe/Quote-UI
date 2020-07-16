@@ -10,17 +10,21 @@ const mapStateToProps = (state) => {
 			 errorMessage: state.loginReducer.errorMessage }
 };
 
+const head = {
+	'content': 'middle'
+}
+
 const NavBarComponent = (props) => { 
 
 		return(
 			<>
 				 
 				<Segment inverted>
-					<Menu inverted>
-						<MenuMenu position="left">
-						<Link to="/home"><Header inverted>HOME</Header></Link>
+					<Menu inverted borderless>
+						<MenuItem vertically fitted>
+						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
 
-						</MenuMenu>
+						</MenuItem>
 						<MenuMenu position="right">
 						{ !props.authUser ? 
 							<>
