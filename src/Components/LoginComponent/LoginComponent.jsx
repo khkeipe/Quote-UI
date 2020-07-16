@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, FormButton, Message, Grid } from 'semantic-ui-react';
+import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, Icon, Label, ModalContent, ModalHeader, GridRow, GridColumn } from 'semantic-ui-react';
 import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -44,27 +45,32 @@ const LoginComponent = (props) => {
 					trigger=
 					{<Button inverted>LOGIN</Button>}
 					>
-				<Modal.Header>LOGIN</Modal.Header>
-				<Modal.Content>
+				<ModalHeader>LOGIN</ModalHeader>
+				<ModalContent>
 					<Form>
+						<FormField>
+							<Input icon="user left" iconPosition="left" placeholder='E-mail Address' onChange={updateEmail} value={email}/>
+						</FormField>
 						<Form.Field>
-							<label>E-mail</label>
-							<input placeholder='E-mail Address' onChange={updateEmail} value={email}/>
-							<i user icon></i>
-						</Form.Field>
-						<Form.Field>
-							<label>Password</label>
-							<input placeholder='Password' type='password' onChange={updatePassword} value={password}/>
+							<Input icon="key" iconPosition="left" placeholder='Password' type='password' onChange={updatePassword} value={password}/>
 						</Form.Field>
 						<Grid>
-							<Grid.Column textAlign="center">
+							<GridRow centered>
 								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
-							</Grid.Column>
+							</GridRow>
+							<GridRow>
+								<GridColumn width="10" verticalAlign="middle" textAlign="center">
+									<HeaderSubHeader >Don't have an account?</HeaderSubHeader>
+								</GridColumn>
+								<GridColumn width="6" textAlign="center">
+									<Button size="tiny">Sign Up</Button>
+								</GridColumn>
+							</GridRow>
 						</Grid>
 						
 						{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
 					</Form>
-				</Modal.Content>
+				</ModalContent>
 			</Modal>
 		</> }
 		</>
