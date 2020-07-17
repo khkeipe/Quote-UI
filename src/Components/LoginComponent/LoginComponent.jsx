@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, Icon, Label, ModalContent, ModalHeader, GridRow, GridColumn } from 'semantic-ui-react';
+import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow, GridColumn, FormInput } from 'semantic-ui-react';
 import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
