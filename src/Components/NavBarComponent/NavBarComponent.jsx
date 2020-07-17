@@ -1,8 +1,9 @@
 import React from 'react';
-import { Menu, Segment, MenuMenu, Button, MenuItem, Header, Container, Grid, GridRow, GridColumn } from 'semantic-ui-react';
+import { Menu, Segment, MenuMenu, Button, MenuItem, Header } from 'semantic-ui-react';
 import LoginComponent from '../LoginComponent/LoginComponent';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutAction } from '../../actions/action-creators';
 
 
 const mapStateToProps = (state) => {
@@ -10,11 +11,19 @@ const mapStateToProps = (state) => {
 			 errorMessage: state.loginReducer.errorMessage }
 };
 
+const mapDispatchToProps = {
+	logoutAction
+}
+
 const head = {
 	'content': 'middle'
 }
 
 const NavBarComponent = (props) => { 
+
+		const logout = () => {
+			props.logoutAction();
+		}
 
 		return(
 			<>
@@ -30,7 +39,7 @@ const NavBarComponent = (props) => {
 							<>
 							<LoginComponent/>
 							</> :
-							<Button inverted> LOGOUT </Button>
+							<Button inverted onClick={logout}> LOGOUT </Button>
 						}
 						</MenuMenu>
 					</Menu>
@@ -40,4 +49,4 @@ const NavBarComponent = (props) => {
 		);
 }
 
-export default connect(mapStateToProps)(NavBarComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBarComponent);
