@@ -28,9 +28,9 @@ const NavBarComponent = (props) => {
 		return(
 			<>
 				 
-				<Segment inverted >
-					<Menu inverted borderless >
-						<MenuItem vertically="true" fitted>
+				<Segment inverted>
+					<Menu inverted borderless="true">
+						<MenuItem>
 						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
 
 						</MenuItem>
@@ -39,7 +39,7 @@ const NavBarComponent = (props) => {
 							<>
 							<LoginComponent/>
 							</> :
-							<Button inverted onClick={logout}> LOGOUT </Button>
+							<Button size="small" inverted onClick={logout}> LOGOUT </Button>
 						}
 						</MenuMenu>
 					</Menu>
