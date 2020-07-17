@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, FormField, Label } from 'semantic-ui-react';
+import { Button, Form, Input, FormField, Label, Segment, Container, Grid, GridRow } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -22,28 +22,32 @@ const QuoteComponent = (props) => {
 	
 		return(
 			<>
-			{ !props.authUser ? <Redirect to="/home"/> : 
-			<>
-				<Form className="container segment">
-					<FormField >
-						<Label >First Name</Label>
-						<Input placeholder='First Name' />
-					</FormField>
-					<FormField>
-						<Label>Last Name</Label>
-						<Input placeholder='Last Name' />
-					</FormField>
-					<Form.Select
-						fluid
-						label=''
-						options={getDealers}
-						placeholder='Dealer'
-					/>
+			{/* { !props.authUser ? <Redirect to="/home"/> : 
+			<> */}
+			<Container>
+				<Grid centered>
+					<GridRow>
+					<Form size="huge">
+						<FormField >
+							<Input placeholder='First Name' />
+						</FormField>
+						<FormField>
+							<Input placeholder='Last Name' />
+						</FormField>
+						<Form.Select
+							fluid
+							label=''
+							options={getDealers}
+							placeholder='Dealer'
+						/>
 
-					<Button type='submit'>Submit</Button>
-					
-				</Form>			
-			</> }
+						<Button type='submit'>Submit</Button>
+						
+					</Form>
+					</GridRow>
+				</Grid>
+			</Container>
+			{/* </> } */}
 			</>
 		)
 }
