@@ -1,6 +1,7 @@
-import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR } from "./action-types";
+import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT } from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
+import { Redirect } from "react-router-dom";
 
 export const loginAction = (email, password) => async (dispatch) => {
 	
@@ -30,4 +31,11 @@ export const loginAction = (email, password) => async (dispatch) => {
 			});
 		}
 	}
+}
+
+export const logoutAction = () => async (dispatch) => {
+	dispatch({
+		type: SUCCESSFUL_LOGOUT ,
+		payload: null
+	})
 }
