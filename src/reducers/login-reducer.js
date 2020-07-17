@@ -1,4 +1,4 @@
-import { SUCCESSFUL_LOGIN, FAILED_INVALID_REQUEST, FAILED_BAD_REQUEST, FAILED_INTERNAL_SERVER_ERROR } from '../actions/action-types';
+import { SUCCESSFUL_LOGIN, FAILED_INVALID_REQUEST, FAILED_BAD_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT } from '../actions/action-types';
 
 const initialState = {
 	authUser: null,
@@ -14,6 +14,12 @@ export const loginReducer = (state = initialState, action) => {
 				authUser: action.payload,
 				errorMessage: ''
 			} 
+		case SUCCESSFUL_LOGOUT:
+			return {
+				...state,
+				authUser: null,
+				errorMessage: ''
+			}
 		case FAILED_INVALID_REQUEST:
 		case FAILED_BAD_REQUEST:
 		case FAILED_INTERNAL_SERVER_ERROR:
