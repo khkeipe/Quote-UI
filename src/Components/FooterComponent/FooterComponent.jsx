@@ -5,31 +5,29 @@ const FooterComponent = () => {
 
 
 	const footer = {
-		'padding': '5em 0em',
-		'position': 'static',
+		'padding': '2em 0em',
+		'position': 'fixed',
 		'bottom': '0',
-		'width': '100%'
+		'width': '100%',
 	}
 
 	return (
 		<>
 		<Segment textAlign="center" vertical inverted style={footer}>
-				<Container>
-					<Grid inverted stackable divided>
-						<GridRow>
-							<GridColumn width="3">
-								<Header as="h4" inverted>About</Header>
-							</GridColumn>
-							<GridColumn width="3">
+				<Grid inverted stackable divided>
+					<GridRow>
+						<GridColumn width="3">
 							<Header as="h4" inverted>About</Header>
-							</GridColumn>
-							<GridColumn width="7">
-							<Header as="h4" inverted>Footer Header</Header>
+						</GridColumn>
+						<GridColumn width="3">
+						<Header as="h4" inverted>About</Header>
+						</GridColumn>
+						<GridColumn width="7">
+						<Header as="h4" inverted>Footer Header</Header>
 
-							</GridColumn>
-						</GridRow>
-					</Grid>
-				</Container>
+						</GridColumn>
+					</GridRow>
+				</Grid>
 			</Segment>
 		</>
 	)
