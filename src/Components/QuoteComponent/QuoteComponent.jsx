@@ -1,5 +1,13 @@
 import React from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Input, FormField, Label } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+const mapStateToProps = (state) => {
+	return {
+		authUser: state.loginReducer.authUser
+	}
+}
 
 const getDealers = () => {
 
@@ -9,20 +17,22 @@ const getDealers = () => {
 }
 
 
-const QuoteComponent = () => {
+const QuoteComponent = (props) => {
 
 	
 		return(
 			<>
+			{ !props.authUser ? <Redirect to="/home"/> : 
+			<>
 				<Form className="container segment">
-					<Form.Field>
-						<label>First Name</label>
-						<input placeholder='First Name' />
-					</Form.Field>
-					<Form.Field>
-						<label>Last Name</label>
-						<input placeholder='Last Name' />
-					</Form.Field>
+					<FormField >
+						<Label >First Name</Label>
+						<Input placeholder='First Name' />
+					</FormField>
+					<FormField>
+						<Label>Last Name</Label>
+						<Input placeholder='Last Name' />
+					</FormField>
 					<Form.Select
 						fluid
 						label=''
@@ -33,9 +43,9 @@ const QuoteComponent = () => {
 					<Button type='submit'>Submit</Button>
 					
 				</Form>			
-			
+			</> }
 			</>
 		)
 }
 
-export default QuoteComponent;
+export default connect(mapStateToProps)(QuoteComponent);
