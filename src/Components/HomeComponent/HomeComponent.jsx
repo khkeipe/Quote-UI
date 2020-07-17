@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Container, Header, Segment, Grid, GridRow, GridColumn } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
+import FooterComponent from '../FooterComponent/FooterComponent';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -20,9 +21,7 @@ const headerSub = {
 	'margin-top': '1.5em'
 }
 
-const footer = {
-	'padding': '5em 0em'
-}
+
 
 const HomeComponent = (props) => {
 
@@ -35,24 +34,8 @@ const HomeComponent = (props) => {
 					<Link to="/quote"> <Button size="huge">Start a Quote</Button> </Link>
 				</Container>
 			</Segment>
-			<Segment textAlign="center" vertical inverted style={footer}>
-				<Container>
-					<Grid inverted stackable divided>
-						<GridRow>
-							<GridColumn width="3">
-								<Header as="h4" inverted>About</Header>
-							</GridColumn>
-							<GridColumn width="3">
-							<Header as="h4" inverted>About</Header>
-							</GridColumn>
-							<GridColumn width="7">
-							<Header as="h4" inverted>Footer Header</Header>
 
-							</GridColumn>
-						</GridRow>
-					</Grid>
-				</Container>
-			</Segment>
+			<FooterComponent/>
 					
 		</>
 	)
