@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Container, Header, Segment } from 'semantic-ui-react';
+import { Button, Header, Segment, Message, Container } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
 import FooterComponent from '../FooterComponent/FooterComponent';
 
@@ -22,21 +22,25 @@ const headerSub = {
 }
 
 
-
 const HomeComponent = (props) => {
 
 	return (
 		<>
 			<Segment textAlign="center" size="large" vertical padded="very">
+				<Header as="h1" style={headerMain}>Super Awesome Pools</Header>
+				<HeaderSubHeader as="h2" style={headerSub}> Get a free quote today! </HeaderSubHeader>
+				{props.authUser ? 
+				<>
+				<Link to="/quote"> <Button size="huge">Start a Quote</Button> </Link>
+				</> :
 				<Container>
-					<Header as="h1" style={headerMain}>Super Awesome Pools</Header>
-					<HeaderSubHeader as="h2" style={headerSub}> Get a free quote today! </HeaderSubHeader>
-					<Link to="/quote"> <Button size="huge">Start a Quote</Button> </Link>
+					<Message info="true" > Log-in to start a quote! </Message>
 				</Container>
+				}
 			</Segment>
 
+			
 			<FooterComponent/>
-					
 		</>
 	)
 };
