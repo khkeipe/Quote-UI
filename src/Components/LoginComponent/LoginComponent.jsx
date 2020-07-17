@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow, GridColumn, FormInput } from 'semantic-ui-react';
+import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow, GridColumn } from 'semantic-ui-react';
 import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -37,6 +37,10 @@ const LoginComponent = (props) => {
 		props.loginAction(email, password)
 	}
 
+	const input = {
+		'width': '100%'
+	}
+
 	return(
 		<>
 		{ props.authUser ? <Redirect to="/home"/> : 
@@ -48,12 +52,13 @@ const LoginComponent = (props) => {
 				<ModalHeader>LOGIN</ModalHeader>
 				<ModalContent>
 					<Form>
+						<div className="ui left icon input" style={input}>
+							<input autoFocus placeholder='E-mail Address' width="100" onChange={updateEmail} value={email}/>
+							<i className="user icon"/>
+						</div>
 						<FormField>
-							<Input icon="user left" iconPosition="left" placeholder='E-mail Address' onChange={updateEmail} value={email}/>
-						</FormField>
-						<Form.Field>
 							<Input icon="key" iconPosition="left" placeholder='Password' type='password' onChange={updatePassword} value={password}/>
-						</Form.Field>
+						</FormField>
 						<Grid>
 							<GridRow centered>
 								<FormButton type='submit' onClick={login}>LOGIN</FormButton>

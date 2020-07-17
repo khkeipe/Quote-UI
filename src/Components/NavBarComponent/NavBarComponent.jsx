@@ -30,7 +30,7 @@ const NavBarComponent = (props) => {
 				 
 				<Segment inverted >
 					<Menu inverted borderless >
-						<MenuItem vertically fitted>
+						<MenuItem vertically="true" fitted>
 						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
 
 						</MenuItem>

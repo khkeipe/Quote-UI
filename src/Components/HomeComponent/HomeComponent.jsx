@@ -11,14 +11,14 @@ const mapStateToProps = (state) => {
 };
 
 const headerMain = {
-	'margin-top': '3em',
-	'font-size': '4em',
-	'font-weight': 'bold'
+	'marginTop': '3em',
+	'fontSize': '4em',
+	'fontWeight': 'bold'
 }
 
 const headerSub = {
-	'font-size': '1.7em',
-	'margin-top': '1.5em'
+	'fontSize': '1.7em',
+	'marginTop': '1.5em'
 }
 
 
