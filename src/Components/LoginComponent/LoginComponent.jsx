@@ -4,6 +4,7 @@ import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
+import CreateUserComponent from '../CreateUserComponent/CreateUserComponent';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -68,7 +69,7 @@ const LoginComponent = (props) => {
 									<HeaderSubHeader >Don't have an account?</HeaderSubHeader>
 								</GridColumn>
 								<GridColumn width="6" textAlign="center">
-									<Button size="tiny">Sign Up</Button>
+									<CreateUserComponent/>
 								</GridColumn>
 							</GridRow>
 						</Grid>
