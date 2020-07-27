@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Form, Input, FormField, Label, Segment, Container, Grid, GridRow, FormSelect, Dropdown, GridColumn, Header } from 'semantic-ui-react';
+import { Button, Input, Segment, Grid, GridRow, Dropdown, GridColumn, Header, Checkbox } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import PoolComponent from '../PoolComponent/PoolComponent';
 
 const mapStateToProps = (state) => {
 	return {
@@ -9,30 +11,26 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const dealers = [
-	{
-	key:'Allen Pools',
-	text:'Allen Pools',
-	value:'Allen Pools'
-	},
-	{ 
-	key: 'Backyard Leisure',
-	text:'Backyard Leisure',
-	value: 'Backyard Leisure'
-	},
-	{ 
-	key: 'B&B Pools LLC',
-	text:'B&B Pools LLC',
-	value: 'B&B Pools LLC'
-	}
-]
-
 const input = {
 	'width': '100%'
 }
 
 
 const QuoteComponent = (props) => {
+
+	const [firstName, setFirstName ] = useState('');
+	const [lastName, setLastName ] = useState('');
+	const [phone, setPhone] = useState('');
+
+	const updateFirstName = (e) => {
+		setFirstName(e.target.value);
+	}
+	const updateLastName = (e) => {
+		setLastName(e.target.value);
+	}
+	const updatePhone = (e) => {
+		setPhone(e.target.value);
+	}
 
 	
 		return(
@@ -48,25 +46,21 @@ const QuoteComponent = (props) => {
 						<GridColumn width="8">
 							<Segment vertical>
 							<div className="ui input" style={input}>
-								<input autoFocus placeholder='First Name' />
+								<input autoFocus placeholder='First Name' onChange={updateFirstName} value={firstName}/>
 							</div>
 							</Segment>
 							<Segment vertical>
-								<Input fluid placeholder='Phone Number' />
+								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
 							</Segment>
 						</GridColumn>
 						<GridColumn width="8">
 							<Segment vertical>
-								<Input fluid placeholder='Last Name' />
+								<Input fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
 							</Segment>
 						</GridColumn>
 					</GridRow>
 					<GridRow>
-							<Dropdown
-								selection
-								options={dealers}
-								placeholder='Dealer'
-							/>
+						<PoolComponent/>
 					</GridRow>
 					<GridRow>
 						<Button size="large" type='submit'>Submit</Button>
