@@ -27,6 +27,10 @@ const dealers = [
 	}
 ]
 
+const input = {
+	'width': '100%'
+}
+
 
 const QuoteComponent = (props) => {
 
@@ -43,7 +47,9 @@ const QuoteComponent = (props) => {
 					<GridRow columns="2" >
 						<GridColumn width="8">
 							<Segment vertical>
-								<Input fluid placeholder='First Name' />
+							<div className="ui input" style={input}>
+								<input autoFocus placeholder='First Name' />
+							</div>
 							</Segment>
 							<Segment vertical>
 								<Input fluid placeholder='Phone Number' />
