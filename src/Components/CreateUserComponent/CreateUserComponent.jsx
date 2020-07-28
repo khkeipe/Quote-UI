@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow, GridColumn } from 'semantic-ui-react';
 import { loginAction } from '../../actions/action-creators';
+import { signUpAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
-import CreateUserComponent from '../CreateUserComponent/CreateUserComponent';
+import { Modal, Button, ModalHeader, ModalContent, Form, FormField, Input, Grid, GridRow, FormButton, Message } from 'semantic-ui-react';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
-			 errorMessage: state.loginReducer.errorMessage }
+			 errorMessage: state.signUpReducer.errorMessage }
 };
 
 const mapDispatchToProps = {
-	loginAction
+	loginAction,
+	signUpAction
 }
 
-const LoginComponent = (props) => {
-	
+const CreateUserComponent = (props) => {
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [passwordTwo, setPasswordTwo] = useState('');
 
 	window.onkeypress = (event) => {
 		let key = event.key.toUpperCase();
 		if(key === 'ENTER' && Modal.open === true) {
-			login();	
+			signUp();	
 		}
 	}
 
@@ -33,24 +33,29 @@ const LoginComponent = (props) => {
 	let updatePassword = (e) => {
 		setPassword(e.target.value);
 	}
-
-	async function login(){
-		props.loginAction(email, password)
+	let updatePasswordTwo = (e) => {
+		setPasswordTwo(e.target.value);
 	}
+
+	const signUp = async () => {
+		props.signUpAction(email, password, passwordTwo);
+	}
+
+	// const login = () => {
+	// 	props.loginAction(newUser.email, newUser.password);
+	// }
 
 	const input = {
 		'width': '100%'
 	}
 
-	return(
+	return (
 		<>
-		{ props.authUser ? <Redirect to="/home"/> : 
-		<> 
-			<Modal size="mini" 
+		<Modal size="mini" 
 					trigger=
-					{<Button inverted>LOGIN</Button>}
+					{<Button>Sign Up</Button>}
 					>
-				<ModalHeader>LOGIN</ModalHeader>
+				<ModalHeader>Sign Up</ModalHeader>
 				<ModalContent>
 					<Form>
 						<div className="ui left icon input" style={input}>
@@ -60,17 +65,12 @@ const LoginComponent = (props) => {
 						<FormField>
 							<Input icon="key" iconPosition="left" placeholder='Password' type='password' onChange={updatePassword} value={password}/>
 						</FormField>
+						<FormField>
+							<Input icon="key" iconPosition="left" placeholder='Verify Password' type='password' onChange={updatePasswordTwo} value={passwordTwo}/>
+						</FormField>
 						<Grid>
 							<GridRow centered>
-								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
-							</GridRow>
-							<GridRow>
-								<GridColumn width="10" verticalAlign="middle" textAlign="center">
-									<HeaderSubHeader >Don't have an account?</HeaderSubHeader>
-								</GridColumn>
-								<GridColumn width="6" textAlign="center">
-									<CreateUserComponent/>
-								</GridColumn>
+								<FormButton type='submit' onClick={signUp}>Create</FormButton>
 							</GridRow>
 						</Grid>
 						
@@ -78,9 +78,9 @@ const LoginComponent = (props) => {
 					</Form>
 				</ModalContent>
 			</Modal>
-		</> }
+
 		</>
-	);
+	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUserComponent);

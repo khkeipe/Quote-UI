@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
     	<Router>
-			<Redirect to="/home"/>
+			{/* <Redirect to="/home"/> */}
 
 			<NavBarComponent/>
 
