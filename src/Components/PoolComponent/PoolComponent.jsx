@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Dropdown, Input, Checkbox, Tab, TabPane } from 'semantic-ui-react';
+import InGroundComponent from './InGroundComponent';
+import MetricComponent from './MetricComponent';
 
 
 const dealers = [
@@ -22,9 +24,9 @@ const dealers = [
 
 const panes = [
 	{ menuItem: 'In Ground',
-	render: () => <TabPane>In Ground</TabPane>},
+	render: () => <TabPane><InGroundComponent/></TabPane>},
 	{ menuItem: 'Metric',
-	render: () => <TabPane>Metric</TabPane>},
+	render: () => <TabPane><MetricComponent/></TabPane>},
 ]
 
 
@@ -32,29 +34,7 @@ const PoolComponent = (props) => {
 
 	return(
 	<>
-		<Tab panes={panes}>
-		</Tab>
-		<Button >In Ground</Button>
-		<Button >Metric </Button>
-
-		<Dropdown
-			selection
-			options={dealers}
-			placeholder='Dealer'
-		/>
-		<Input placeholder="Customer"/>
-		
-		<Dropdown
-			selection
-			placeholder="Pool Size"
-		/>
-		<Dropdown 
-			selection
-			placeholder="Pool Type"
-		/>
-
-		<Checkbox />
-		<Checkbox />
+		<Tab panes={panes}></Tab>
 	</>
 	)
 }
