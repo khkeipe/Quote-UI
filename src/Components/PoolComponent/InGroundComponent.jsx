@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label, Menu } from 'semantic-ui-react';
+import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label } from 'semantic-ui-react';
 import { useState } from 'react';
 import { getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
@@ -85,6 +85,9 @@ const InGroundComponent = (props) => {
 				console.log({[e.target.id]: e.target.value});
 				break;
 			}
+			default: {
+				return;
+			}
 		}
 	}
 
@@ -92,10 +95,12 @@ const InGroundComponent = (props) => {
 		switch(e.target.id) {
 			case 'skimmer': {
 				setSkimmer(!skimmer);
+				console.log(skimmer);
 				break;
 			}
 			case 'ladder': {
 				setLadder(!ladder);
+				console.log(ladder);
 				break;
 			}
 			default: {
@@ -138,11 +143,11 @@ const InGroundComponent = (props) => {
 				<GridColumn textAlign="left">
 					<Label>Additional Options</Label>
 					<GridRow>
-						<Checkbox label="Skimmer" checked={skimmer} onClick={updateCheckbox}/>
+						<Checkbox id='skimmer' label="Skimmer" checked={skimmer} onChange={updateCheckbox}/>
 						
 					</GridRow>	
 					<GridRow>
-						<Checkbox label="Wall Ladder" value={ladder} onChange={updateCheckbox}/>
+						<Checkbox id='ladder' label="Wall Ladder" checked={ladder} onChange={updateCheckbox}/>
 					</GridRow>	
 					<GridRow>
 						<Checkbox label="...etc" />

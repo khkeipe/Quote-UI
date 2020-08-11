@@ -1,4 +1,4 @@
-import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT, SUCCESSFUL_SIGNUP } from "./action-types";
+import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT } from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
 import { createNewUser } from "../remote/user-service";
