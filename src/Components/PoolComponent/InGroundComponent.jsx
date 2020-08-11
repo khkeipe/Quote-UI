@@ -4,13 +4,6 @@ import { useState } from 'react';
 import { getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
 
-
-// const dealers = [
-// 	{ key: 1, text: 'Dealer 1', value: 'Dealer 1' },
-// 	{ key: 2, text: 'Dealer 2', value: 'Dealer 2' },
-// 	{ key: 3, text: 'Dealer 3', value: 'Dealer 3' },
-//   ]
-
 const poolTypes = [
 	{ key: 1, text: '', value: '' },
 	{ key: 2, text: 'ADIRONDACK', value: 'ADIRONDACK' },
@@ -39,8 +32,6 @@ const wallHeights = [
 	{ key: 3, text: '52"', value: '52"' },
   ]
 
-
-
 const InGroundComponent = (props) => {
 
 	const [dealer, setDealer] = useState('');
@@ -53,16 +44,26 @@ const InGroundComponent = (props) => {
 	const [ladder, setLadder] = useState(false);
 	const [dealers, setDealers] = useState([]);
 	
-	const update = (e, data) => {
+	const updateDropdown = (e, data) => {
 		let content = {[data.name]: data.value};
 		switch(data.name) {
 			case 'dealer': {
 				setDealer(content);
-				console.log(dealer);
+				console.log(content);
 				break;
 			}
 			case 'poolSize': {
 				setPoolSize(content);
+				console.log(content);
+				break;
+			}
+			case 'wallHeight': {
+				setWallHeight(content);
+				console.log(content);
+				break;
+			}
+			case 'poolType': {
+				setPoolType(content);
 				console.log(content);
 				break;
 			}
@@ -72,17 +73,35 @@ const InGroundComponent = (props) => {
 		}
 	}
 
-	const updateLength = (e) => {
-		setLength(e.target.value);
+	const updateInput = (e) => {
+		switch(e.target.id) {
+			case 'length': {
+				setLength(e.target.value);
+				console.log({[e.target.id]: e.target.value});
+				break;
+			}
+			case 'width': {
+				setWidth(e.target.value);
+				console.log({[e.target.id]: e.target.value});
+				break;
+			}
+		}
 	}
 
-	const updateWidth = (e) => {
-		setWidth(e.target.value);
-	}
-
-	const updateCheckbox = () => {
-		setSkimmer(!skimmer);
-		console.log(skimmer);		
+	const updateCheckbox= (e) => {
+		switch(e.target.id) {
+			case 'skimmer': {
+				setSkimmer(!skimmer);
+				break;
+			}
+			case 'ladder': {
+				setLadder(!ladder);
+				break;
+			}
+			default: {
+				return;
+			}
+		}
 	}
 
 	useEffect( async () => {
@@ -106,14 +125,14 @@ const InGroundComponent = (props) => {
 	<>
 		<Grid centered padded>
 			
-			<Dropdown name="dealer" placeholder="Dealer" options={dealers} selection onChange={update}/>
-			<Dropdown selection	placeholder="Pool Type" name="poolType" options={poolTypes} onChange={update} />
-			<Dropdown selection placeholder="Pool Size" name='poolSize' options={poolSizes} onChange={update} />
+			<Dropdown name="dealer" placeholder="Dealer" options={dealers} selection onChange={updateDropdown}/>
+			<Dropdown selection	placeholder="Pool Type" name="poolType" options={poolTypes} onChange={updateDropdown} />
+			<Dropdown selection placeholder="Pool Size" name='poolSize' options={poolSizes} onChange={updateDropdown} />
 			
-			<Input placeholder="Custom Length" id='length' label="FT" labelPosition="right" value={length} onChange={updateLength}/>
-			<Input placeholder="Custom Width" id='width' label="FT" labelPosition="right" value={width} onChange={updateWidth}/>
+			<Input placeholder="Custom Length" id='length' label="FT" labelPosition="right" value={length} onChange={updateInput}/>
+			<Input placeholder="Custom Width" id='width' label="FT" labelPosition="right" value={width} onChange={updateInput}/>
 
-			<Dropdown selection placeholder="Wall Height" name="wallHeight" options={wallHeights} onChange={update}	/>
+			<Dropdown selection placeholder="Wall Height" name="wallHeight" options={wallHeights} onChange={updateDropdown}	/>
 
 			<GridRow>
 				<GridColumn textAlign="left">
