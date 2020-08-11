@@ -1,15 +1,15 @@
-import  { userClient } from './user-client';
+import  { client } from './user-client';
 
 export async function getAllUsers() {
 
-	let response = await userClient.get('/users');
+	let response = await client.get('/users');
 	console.log(response.data);
 	
 	return response.data;
 }
 
 export async function createNewUser(email, password, passwordVerification) {
-	let response = await userClient.post('/users', {
+	let response = await client.post('/users', {
 		email: email,
 		password: password,
 		passwordVerification: passwordVerification
