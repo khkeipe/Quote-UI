@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, Segment, Grid, GridRow, Dropdown, GridColumn, Header, Checkbox, Label } from 'semantic-ui-react';
+import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
