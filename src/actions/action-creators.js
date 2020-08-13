@@ -1,4 +1,4 @@
-import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT } from "./action-types";
+import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT, SUCCESSFUL_CONTACT_CREATION } from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
 import { createNewUser } from "../remote/user-service";
@@ -68,4 +68,19 @@ export const signUpAction = (email, password, passwordVerification) => async (di
 			});
 		}
 	}
+}
+
+export const contactAction = (firstName, lastName, number, email) => async (dispatch) => {
+
+	let contactInfo = {
+		firstName: firstName,
+		lastName: lastName,
+		number: number,
+		email: email
+	}
+
+	dispatch({
+		type: SUCCESSFUL_CONTACT_CREATION,
+		payload: contactInfo
+	})
 }
