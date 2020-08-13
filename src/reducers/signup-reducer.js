@@ -23,6 +23,8 @@ export const signUpReducer = (state = initialState, action) => {
 			}
 
 		default:
-			return state
+			return {
+			...state
+			}
 	}
 }
