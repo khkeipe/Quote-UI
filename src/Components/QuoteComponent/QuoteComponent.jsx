@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
+import { contactAction } from '../../actions/action-creators';
 
 const mapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser
 	}
+}
+
+const mapDispatchToProps = {
+	contactAction
 }
 
 const input = {
@@ -35,6 +40,10 @@ const QuoteComponent = (props) => {
 
 	const updateEmail = (e) => {
 		setEmail(e.target.value);
+	}
+
+	const buildQuote = () => {
+		props.contactAction(firstName, lastName, phone, email);
 	}
 
 	
@@ -80,7 +89,7 @@ const QuoteComponent = (props) => {
 					</GridRow>
 
 					<GridRow>
-						<Button size="large" type='submit'>Submit</Button>
+						<Button size="large" type='submit' onClick={buildQuote}>Submit</Button>
 					</GridRow>
 				</Grid>
 			</Segment>
@@ -89,4 +98,4 @@ const QuoteComponent = (props) => {
 		)
 }
 
-export default connect(mapStateToProps)(QuoteComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteComponent);
