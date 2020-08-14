@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
-import { contactAction } from '../../actions/action-creators';
+import { contactCreatorAction } from '../../actions/action-creators';
 
 const mapStateToProps = (state) => {
 	return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-	contactAction
+	contactCreatorAction
 }
 
 const input = {
@@ -43,7 +43,13 @@ const QuoteComponent = (props) => {
 	}
 
 	const buildQuote = () => {
-		props.contactAction(firstName, lastName, phone, email);
+		let contactInfo = {
+			firstName: firstName,
+			lastName: lastName,
+			number: phone,
+			email: email
+		}
+		props.contactCreatorAction(contactInfo);
 	}
 
 	

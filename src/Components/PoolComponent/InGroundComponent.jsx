@@ -3,6 +3,18 @@ import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label } from 'sem
 import { useState } from 'react';
 import { getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { quoteCreatorAction } from '../../actions/action-creators';
+
+const MapStateToProps = (state) => {
+	return {
+		quoteInfo: state.quoteReducer.quoteInfo
+	}
+}
+
+const MapDispatchToProps = {
+	quoteCreatorAction
+}
 
 const poolTypes = [
 	{ key: 1, text: '', value: '' },
@@ -43,28 +55,35 @@ const InGroundComponent = (props) => {
 	const [skimmer, setSkimmer] = useState(false);
 	const [ladder, setLadder] = useState(false);
 	const [dealers, setDealers] = useState([]);
+
+	let quoteInfo = {
+		dealer: dealer,
+		poolSize: poolSize,
+		length: length,
+		width: width,
+		poolType: poolType,
+		wallHeight: wallHeight,
+		skimmer: skimmer,
+		ladder: ladder,
+	}
 	
 	const updateDropdown = (e, data) => {
-		let content = {[data.name]: data.value};
 		switch(data.name) {
 			case 'dealer': {
-				setDealer(content);
-				console.log(content);
+				setDealer(data.value);
+				// props.quoteCreatorAction(quoteInfo);
 				break;
 			}
 			case 'poolSize': {
-				setPoolSize(content);
-				console.log(content);
+				setPoolSize(data.value);
 				break;
 			}
 			case 'wallHeight': {
-				setWallHeight(content);
-				console.log(content);
+				setWallHeight(data.value);
 				break;
 			}
 			case 'poolType': {
-				setPoolType(content);
-				console.log(content);
+				setPoolType(data.value);
 				break;
 			}
 			default: {
@@ -77,12 +96,10 @@ const InGroundComponent = (props) => {
 		switch(e.target.id) {
 			case 'length': {
 				setLength(e.target.value);
-				console.log({[e.target.id]: e.target.value});
 				break;
 			}
 			case 'width': {
 				setWidth(e.target.value);
-				console.log({[e.target.id]: e.target.value});
 				break;
 			}
 			default: {
@@ -95,12 +112,10 @@ const InGroundComponent = (props) => {
 		switch(e.target.id) {
 			case 'skimmer': {
 				setSkimmer(!skimmer);
-				console.log(skimmer);
 				break;
 			}
 			case 'ladder': {
 				setLadder(!ladder);
-				console.log(ladder);
 				break;
 			}
 			default: {
@@ -109,22 +124,26 @@ const InGroundComponent = (props) => {
 		}
 	}
 
-	useEffect( async () => {
+	useEffect(() => {
+	
+		const fetchDealers = async () => {
+
+			console.log(quoteInfo);
 
 		let dealerArray = [];
 
-		try{
-			let response = await getDealers();
+		let response = await getDealers();
 			for(let item of response) {
 				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
 				dealerArray.push(nextDealer);
 			}
-		} catch (e) {
-			console.log(e);
+		
+			setDealers(dealerArray);
+
 		}
-		setDealers(dealerArray);
-		return dealers;
-	},[])
+		fetchDealers();
+		props.quoteCreatorAction(quoteInfo);
+	},[dealer, poolSize, length, width, poolType, skimmer, ladder, wallHeight])
 
 	return(
 	<>
@@ -159,4 +178,4 @@ const InGroundComponent = (props) => {
 	)
 }
 
-export default InGroundComponent;
+export default connect(MapStateToProps, MapDispatchToProps)(InGroundComponent);
