@@ -1,0 +1,10 @@
+{
+	"short_name": "Pool App",
+	"name": "Pool Quote App",
+	"icons": [],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+  }
+  
