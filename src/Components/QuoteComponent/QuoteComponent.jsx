@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
 import { contactCreatorAction } from '../../actions/action-creators';
@@ -72,16 +72,18 @@ const QuoteComponent = (props) => {
 								<input autoFocus placeholder='First Name' onChange={updateFirstName} value={firstName}/>
 							</div>
 							</Segment>
-							<Segment vertical>
-								<Label>Phone Number</Label>
-								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
-							</Segment>
-						</GridColumn>
-						<GridColumn width="6">
+							
 							<Segment vertical>
 								<Label>Last Name</Label>
 								<Input fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
 							</Segment>
+						</GridColumn>
+						<GridColumn width="6">
+						<Segment vertical>
+								<Label>Phone Number</Label>
+								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
+							</Segment>
+							
 							<Segment vertical>
 								<Label>E-mail Address</Label>
 								<Input fluid placeholder='E-Mail Address' onChange={updateEmail} value={email}/>
@@ -97,13 +99,11 @@ const QuoteComponent = (props) => {
 					</GridRow>
 
 					<GridRow>
-						<Button size="large" type='submit' onClick={buildQuote}>Submit</Button>
+						<Link to="/quote"><Button size="large" type='submit' onClick={buildQuote}>Review</Button></Link>
 					</GridRow>
 				</Grid>
 			</Segment>
-			<Segment>
-				<QuoteInfoComponent/>
-			</Segment>
+			
 			{/* </> } */}
 			</>
 		)
