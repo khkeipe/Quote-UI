@@ -128,8 +128,6 @@ const InGroundComponent = (props) => {
 	
 		const fetchDealers = async () => {
 
-			console.log(quoteInfo);
-
 		let dealerArray = [];
 
 		let response = await getDealers();
