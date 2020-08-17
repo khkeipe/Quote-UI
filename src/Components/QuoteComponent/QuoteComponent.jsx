@@ -5,10 +5,13 @@ import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
 import { contactCreatorAction } from '../../actions/action-creators';
+import { useEffect } from 'react';
+import QuoteInfoComponent from './QuoteInfoComponent';
 
 const mapStateToProps = (state) => {
 	return {
-		authUser: state.loginReducer.authUser
+		authUser: state.loginReducer.authUser,
+		quoteInfo: state.quoteReducer.quoteInfo
 	}
 }
 
@@ -52,7 +55,6 @@ const QuoteComponent = (props) => {
 		props.contactCreatorAction(contactInfo);
 	}
 
-	
 		return(
 			<>
 			{/* { !props.authUser ? <Redirect to="/home"/> : 
@@ -98,6 +100,9 @@ const QuoteComponent = (props) => {
 						<Button size="large" type='submit' onClick={buildQuote}>Submit</Button>
 					</GridRow>
 				</Grid>
+			</Segment>
+			<Segment>
+				<QuoteInfoComponent/>
 			</Segment>
 			{/* </> } */}
 			</>
