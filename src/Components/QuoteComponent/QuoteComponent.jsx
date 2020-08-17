@@ -1,14 +1,22 @@
 import React from 'react';
-import { Button, Input, Segment, Grid, GridRow, Dropdown, GridColumn, Header, Checkbox, Label } from 'semantic-ui-react';
+import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
+import { contactCreatorAction } from '../../actions/action-creators';
+import { useEffect } from 'react';
+import QuoteInfoComponent from './QuoteInfoComponent';
 
 const mapStateToProps = (state) => {
 	return {
-		authUser: state.loginReducer.authUser
+		authUser: state.loginReducer.authUser,
+		quoteInfo: state.quoteReducer.quoteInfo
 	}
+}
+
+const mapDispatchToProps = {
+	contactCreatorAction
 }
 
 const input = {
@@ -37,7 +45,16 @@ const QuoteComponent = (props) => {
 		setEmail(e.target.value);
 	}
 
-	
+	const buildQuote = () => {
+		let contactInfo = {
+			firstName: firstName,
+			lastName: lastName,
+			number: phone,
+			email: email
+		}
+		props.contactCreatorAction(contactInfo);
+	}
+
 		return(
 			<>
 			{ !props.authUser ? <Redirect to="/home"/> : 
@@ -55,16 +72,18 @@ const QuoteComponent = (props) => {
 								<input autoFocus placeholder='First Name' onChange={updateFirstName} value={firstName}/>
 							</div>
 							</Segment>
-							<Segment vertical>
-								<Label>Phone Number</Label>
-								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
-							</Segment>
-						</GridColumn>
-						<GridColumn width="6">
+
 							<Segment vertical>
 								<Label>Last Name</Label>
 								<Input fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
 							</Segment>
+						</GridColumn>
+						<GridColumn width="6">
+						<Segment vertical>
+								<Label>Phone Number</Label>
+								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
+							</Segment>
+							
 							<Segment vertical>
 								<Label>E-mail Address</Label>
 								<Input fluid placeholder='E-Mail Address' onChange={updateEmail} value={email}/>
@@ -80,13 +99,14 @@ const QuoteComponent = (props) => {
 					</GridRow>
 
 					<GridRow>
-						<Button size="large" type='submit'>Submit</Button>
+						<Link to="/quote"><Button size="large" type='submit' onClick={buildQuote}>Review</Button></Link>
 					</GridRow>
 				</Grid>
 			</Segment>
+			
 			</> }
 			</>
 		)
 }
 
-export default connect(mapStateToProps)(QuoteComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteComponent);

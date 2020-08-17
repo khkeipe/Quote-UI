@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import QuoteComponent from './Components/QuoteComponent/QuoteComponent';
 import HomeComponent from './Components/HomeComponent/HomeComponent';
+import QuoteInfoComponent from './Components/QuoteComponent/QuoteInfoComponent';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
 			<Switch>
 
 				<Route path="/home" render={() => <HomeComponent /> } />
-				<Route path="/quote" render={() => <QuoteComponent/> } />
+				<Route path="/form" render={() => <QuoteComponent/> } />
+				<Route path="/quote" render={() => <QuoteInfoComponent/> } />
 
 			</Switch>
 		</Router>
