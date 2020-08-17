@@ -57,8 +57,8 @@ const QuoteComponent = (props) => {
 
 		return(
 			<>
-			{/* { !props.authUser ? <Redirect to="/home"/> : 
-			<> */}
+			{ !props.authUser ? <Redirect to="/home"/> : 
+			<>
 			<Segment raised>
 				<Grid centered divided="vertically" padded="vertically">
 					<GridRow>
@@ -72,7 +72,7 @@ const QuoteComponent = (props) => {
 								<input autoFocus placeholder='First Name' onChange={updateFirstName} value={firstName}/>
 							</div>
 							</Segment>
-							
+
 							<Segment vertical>
 								<Label>Last Name</Label>
 								<Input fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
@@ -104,7 +104,7 @@ const QuoteComponent = (props) => {
 				</Grid>
 			</Segment>
 			
-			{/* </> } */}
+			</> }
 			</>
 		)
 }
