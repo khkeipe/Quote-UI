@@ -31,7 +31,7 @@ const HomeComponent = (props) => {
 				<HeaderSubHeader as="h2" style={headerSub}> Get a free quote today! </HeaderSubHeader>
 				{props.authUser ? 
 				<>
-				<Link to="/quote"> <Button size="huge">Start a Quote</Button> </Link>
+				<Link to="/form"> <Button size="huge">Start a Quote</Button> </Link>
 				</> :
 				<Container>
 					<Message info="true" > Log-in to start a quote! </Message>
