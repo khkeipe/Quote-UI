@@ -5,8 +5,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
 import { contactCreatorAction } from '../../actions/action-creators';
-import { useEffect } from 'react';
-import QuoteInfoComponent from './QuoteInfoComponent';
 
 const mapStateToProps = (state) => {
 	return {
@@ -30,6 +28,9 @@ const QuoteComponent = (props) => {
 	const [lastName, setLastName ] = useState('');
 	const [phone, setPhone] = useState('');
 	const [email, setEmail] = useState('');
+	const [orderNumber, setOrderNumber] = useState('');
+	const [date, setDate] = useState('');
+	const [dateNeeded, setDateNeeded] = useState('');
 
 	const updateFirstName = (e) => {
 		setFirstName(e.target.value);
