@@ -99,10 +99,11 @@ const QuoteComponent = (props) => {
 						Pool Image Will Go Here
 					</GridRow>
 
-					<GridRow>
-						<Link to="/quote"><Button size="large" type='submit' onClick={buildQuote}>Review</Button></Link>
-					</GridRow>
 				</Grid>
+					
+				<Segment inverted padded textAlign='center'>
+					<Link to="/quote"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
+				</Segment>
 			</Segment>
 			
 			</> }
