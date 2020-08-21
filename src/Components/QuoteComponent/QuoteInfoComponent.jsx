@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Segment, Grid, GridRow, GridColumn } from 'semantic-ui-react';
+import { Header, Segment, Grid, GridRow, GridColumn, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const MapStateToProps = (state) => {
 	return {
@@ -14,7 +15,7 @@ const QuoteInfoComponent = (props) => {
 
 	return (
 		<>
-			<Segment raised>
+			<Segment raised padded>
 				<Grid centered divided="vertically" padded="vertically">
 					<GridRow>
 						<Header size="large">CONTACT INFORMATION</Header>
@@ -28,8 +29,7 @@ const QuoteInfoComponent = (props) => {
 						</GridColumn>
 					</GridRow>
 				</Grid>
-			</Segment>
-			<Segment raised>
+			
 				<Grid centered divided="vertically" padded="vertically">
 					<GridRow>
 						<Header size="large">QUOTE DETAILS</Header>
@@ -47,6 +47,11 @@ const QuoteInfoComponent = (props) => {
 						</GridColumn>
 					</GridRow>
 				</Grid>
+
+					<Segment inverted textAlign='center' padded>
+						<Link><Button inverted color='grey'> Back</Button></Link>
+						<Link><Button inverted color='grey'> Submit</Button></Link>
+					</Segment>
 			</Segment>
 		</>
 	)
