@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Segment, Grid, GridRow, GridColumn, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const MapStateToProps = (state) => {
 	return {
@@ -12,6 +12,8 @@ const MapStateToProps = (state) => {
 }
 
 const QuoteInfoComponent = (props) => {
+
+
 
 	return (
 		<>
@@ -49,7 +51,7 @@ const QuoteInfoComponent = (props) => {
 				</Grid>
 
 					<Segment inverted textAlign='center' padded>
-						<Link><Button inverted color='grey'> Back</Button></Link>
+						<Link to="/form"><Button inverted color='grey'> Back</Button></Link>
 						<Link><Button inverted color='grey'> Submit</Button></Link>
 					</Segment>
 			</Segment>
