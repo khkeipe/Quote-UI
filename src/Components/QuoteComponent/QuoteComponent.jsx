@@ -1,12 +1,10 @@
 import React from 'react';
-import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label } from 'semantic-ui-react';
+import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
 import { contactCreatorAction } from '../../actions/action-creators';
-import { useEffect } from 'react';
-import QuoteInfoComponent from './QuoteInfoComponent';
 
 const mapStateToProps = (state) => {
 	return {
@@ -20,7 +18,11 @@ const mapDispatchToProps = {
 }
 
 const input = {
-	'width': '100%'
+	'width': '100%',
+}
+
+const color = {
+	'color': 'black'
 }
 
 
@@ -30,6 +32,8 @@ const QuoteComponent = (props) => {
 	const [lastName, setLastName ] = useState('');
 	const [phone, setPhone] = useState('');
 	const [email, setEmail] = useState('');
+	const [orderNumber, setOrderNumber] = useState('');
+	const [requestDate, setRequestDate] = useState('');
 
 	const updateFirstName = (e) => {
 		setFirstName(e.target.value);
@@ -57,54 +61,64 @@ const QuoteComponent = (props) => {
 
 		return(
 			<>
-			{ !props.authUser ? <Redirect to="/home"/> : 
-			<>
+			{/* { !props.authUser ? <Redirect to="/home"/> : 
+			<> */}
 			<Segment raised>
-				<Grid centered divided="vertically" padded="vertically">
-					<GridRow>
+				<Grid padded="vertically">
+					<GridRow centered>
 						<Header size="huge">Quote Form</Header>
 					</GridRow>
+					<Divider/>
 					<GridRow>
-						<GridColumn width="6">
-							<Segment vertical>
-								<Label>First Name</Label>
+						<GridColumn width='3'>
 							<div className="ui input" style={input}>
-								<input autoFocus placeholder='First Name' onChange={updateFirstName} value={firstName}/>
+								<input autoFocus tabIndex='1' placeholder='Order Number' value={orderNumber} />
 							</div>
-							</Segment>
-
-							<Segment vertical>
-								<Label>Last Name</Label>
-								<Input fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
-							</Segment>
 						</GridColumn>
-						<GridColumn width="6">
-						<Segment vertical>
-								<Label>Phone Number</Label>
-								<Input fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
-							</Segment>
-							
-							<Segment vertical>
-								<Label>E-mail Address</Label>
-								<Input fluid placeholder='E-Mail Address' onChange={updateEmail} value={email}/>
-							</Segment>
+						<GridColumn width='10'/>
+						<GridColumn width='3'>
+							<Input fluid tabIndex='2' type='date' label={{content:"Requested Date", color: 'grey'}} value={requestDate}/>
 						</GridColumn>
+						
 					</GridRow>
+
 					<GridRow>
+						<GridColumn width='4'>
+							<Input tabIndex='3' fluid placeholder='First Name' onChange={updateFirstName} value={firstName}/>
+						</GridColumn>
+						<GridColumn width='4'>
+						<Input tabIndex='4' fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
+
+						</GridColumn>
+						<GridColumn width='4'>
+						<Input tabIndex='5' fluid placeholder='Phone Number' onChange={updatePhone} value={phone}/>
+
+						</GridColumn>
+						<GridColumn width='4'>
+						<Input tabIndex='6' fluid placeholder='E-Mail Address' onChange={updateEmail} value={email}/>
+
+						</GridColumn>
+
+					</GridRow>
+
+					<Divider/>
+
+					<GridRow centered>
 						<PoolComponent/>
 					</GridRow>
 
-					<GridRow>
+					<GridRow centered>
 						Pool Image Will Go Here
 					</GridRow>
 
-					<GridRow>
-						<Link to="/quote"><Button size="large" type='submit' onClick={buildQuote}>Review</Button></Link>
-					</GridRow>
 				</Grid>
+					
+				<Segment inverted padded textAlign='center'>
+					<Link to="/quote"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
+				</Segment>
 			</Segment>
 			
-			</> }
+			{/* </> } */}
 			</>
 		)
 }

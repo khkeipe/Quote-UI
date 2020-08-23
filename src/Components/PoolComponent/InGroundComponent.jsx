@@ -33,15 +33,18 @@ const poolTypes = [
   ]
 
 const poolSizes = [
-	{ key: 1, text: 'Size 1', value: 'Size 1' },
-	{ key: 2, text: 'Size 2', value: 'Size 2' },
-	{ key: 3, text: 'Size 3', value: 'Size 3' },
+	{ key: 1, text: '', value: '' },
+	{ key: 2, text: 'Size 1', value: 'Size 1' },
+	{ key: 3, text: 'Size 2', value: 'Size 2' },
+	{ key: 4, text: 'Size 3', value: 'Size 3' },
+	{ key: 5, text: 'Custom', value: 'Custom' },
   ]
 
 const wallHeights = [
-	{ key: 1, text: '42"', value: '42"' },
-	{ key: 2, text: '48"', value: '48"' },
-	{ key: 3, text: '52"', value: '52"' },
+	{ key: 1, text: '', value: '' },
+	{ key: 2, text: '42"', value: '42"' },
+	{ key: 3, text: '48"', value: '48"' },
+	{ key: 4, text: '52"', value: '52"' },
   ]
 
 const InGroundComponent = (props) => {
@@ -145,23 +148,33 @@ const InGroundComponent = (props) => {
 
 	return(
 	<>
-		<Grid centered padded>
-			
-			<Dropdown name="dealer" placeholder="Dealer" options={dealers} selection onChange={updateDropdown}/>
-			<Dropdown selection	placeholder="Pool Type" name="poolType" options={poolTypes} onChange={updateDropdown} />
-			<Dropdown selection placeholder="Pool Size" name='poolSize' options={poolSizes} onChange={updateDropdown} />
-			
-			<Input placeholder="Custom Length" id='length' label="FT" labelPosition="right" value={length} onChange={updateInput}/>
-			<Input placeholder="Custom Width" id='width' label="FT" labelPosition="right" value={width} onChange={updateInput}/>
-
-			<Dropdown selection placeholder="Wall Height" name="wallHeight" options={wallHeights} onChange={updateDropdown}	/>
-
+		<Grid padded >
+			<GridRow >
+				<GridColumn width='4'>
+					<Dropdown fluid name="dealer" placeholder="Dealer" options={dealers} selection onChange={updateDropdown}/>
+				</GridColumn>
+				<GridColumn width='4'>
+					<Dropdown  fluid selection	placeholder="Pool Type" name="poolType" options={poolTypes} onChange={updateDropdown} />
+				</GridColumn>
+				<GridColumn width='4'>
+					<Dropdown fluid selection placeholder="Pool Size" name='poolSize' options={poolSizes} onChange={updateDropdown} />
+					{ (poolSize == 'Custom') ? 
+					<>
+					<Input fluid placeholder="Length" id='length' label={{content:"FT", color: 'grey'}} labelPosition="right" value={length} onChange={updateInput}/>
+					<Input fluid placeholder="Width" id='width' label={{content:"FT", color: 'grey'}} labelPosition="right" value={width} onChange={updateInput}/>
+					</> 
+					: <> </> }
+					</GridColumn>
+				<GridColumn width='4'>
+					<Dropdown  fluid selection placeholder="Wall Height" name="wallHeight" options={wallHeights} onChange={updateDropdown}	/>
+				</GridColumn>
+			</GridRow>
+		
 			<GridRow>
-				<GridColumn textAlign="left">
-					<Label>Additional Options</Label>
+				<GridColumn textAlign='left' width='4'>
+					<Label color='grey'>Additional Options</Label>
 					<GridRow>
 						<Checkbox id='skimmer' label="Skimmer" checked={skimmer} onChange={updateCheckbox}/>
-						
 					</GridRow>	
 					<GridRow>
 						<Checkbox id='ladder' label="Wall Ladder" checked={ladder} onChange={updateCheckbox}/>
