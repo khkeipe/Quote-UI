@@ -24,10 +24,12 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header textAlign="left">First Name: {props.contactInfo.firstName} </Header>
-							<Header textAlign="left">Last Name: {props.contactInfo.lastName} </Header>
-							<Header textAlign="left">Phone Number: {props.contactInfo.number} </Header>
-							<Header textAlign="left">E-mail: {props.contactInfo.email} </Header>
+							<Header textAlign="left">Order Number: <Header sub size='huge'>{props.contactInfo?.orderNumber}</Header></Header>
+							<Header textAlign="left">Requested Date: <Header sub size='huge'>{props.contactInfo?.requestDate}</Header></Header>
+							<Header textAlign="left">Name: <Header sub size='huge'>{props.contactInfo?.firstName} {props.contactInfo?.lastName} </Header></Header>
+							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.contactInfo?.number} </Header></Header>
+							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.contactInfo?.email} </Header></Header>
+							<Header textAlign="left">Address: <Header sub size='huge'>{props.contactInfo?.street} {props.contactInfo?.city}, {props.contactInfo?.state} {props.contactInfo?.zip}</Header></Header>
 						</GridColumn>
 					</GridRow>
 				</Grid>
