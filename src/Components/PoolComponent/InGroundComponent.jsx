@@ -49,14 +49,14 @@ const wallHeights = [
 
 const InGroundComponent = (props) => {
 
-	const [dealer, setDealer] = useState('');
-	const [poolSize, setPoolSize] = useState('');
-	const [length, setLength] = useState('');
-	const [width, setWidth] = useState('');
-	const [poolType, setPoolType] = useState('');
-	const [wallHeight, setWallHeight] = useState('');
-	const [skimmer, setSkimmer] = useState(false);
-	const [ladder, setLadder] = useState(false);
+	const [dealer, setDealer] = useState(props.quoteInfo?.dealer);
+	const [poolSize, setPoolSize] = useState(props.quoteInfo?.poolSize);
+	const [length, setLength] = useState(props.quoteInfo?.length);
+	const [width, setWidth] = useState(props.quoteInfo?.width);
+	const [poolType, setPoolType] = useState(props.quoteInfo?.poolType);
+	const [wallHeight, setWallHeight] = useState(props.quoteInfo?.wallHeight);
+	const [skimmer, setSkimmer] = useState(props.quoteInfo?.skimmer);
+	const [ladder, setLadder] = useState(props.quoteInfo?.ladder);
 	const [dealers, setDealers] = useState([]);
 
 	let quoteInfo = {
@@ -151,13 +151,13 @@ const InGroundComponent = (props) => {
 		<Grid padded >
 			<GridRow >
 				<GridColumn width='4'>
-					<Dropdown fluid name="dealer" placeholder="Dealer" options={dealers} selection onChange={updateDropdown}/>
+					<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealers} selection onChange={updateDropdown}/>
 				</GridColumn>
 				<GridColumn width='4'>
-					<Dropdown  fluid selection	placeholder="Pool Type" name="poolType" options={poolTypes} onChange={updateDropdown} />
+					<Dropdown  fluid selection	placeholder="Pool Type" name="poolType" defaultValue={poolType} options={poolTypes} onChange={updateDropdown} />
 				</GridColumn>
 				<GridColumn width='4'>
-					<Dropdown fluid selection placeholder="Pool Size" name='poolSize' options={poolSizes} onChange={updateDropdown} />
+					<Dropdown fluid selection placeholder="Pool Size" name='poolSize' defaultValue={poolSize} options={poolSizes} onChange={updateDropdown} />
 					{ (poolSize == 'Custom') ? 
 					<>
 					<Input fluid placeholder="Length" id='length' label={{content:"FT", color: 'grey'}} labelPosition="right" value={length} onChange={updateInput}/>
@@ -166,7 +166,7 @@ const InGroundComponent = (props) => {
 					: <> </> }
 					</GridColumn>
 				<GridColumn width='4'>
-					<Dropdown  fluid selection placeholder="Wall Height" name="wallHeight" options={wallHeights} onChange={updateDropdown}	/>
+					<Dropdown  fluid selection placeholder="Wall Height" name="wallHeight" defaultValue={wallHeight} options={wallHeights} onChange={updateDropdown}	/>
 				</GridColumn>
 			</GridRow>
 		

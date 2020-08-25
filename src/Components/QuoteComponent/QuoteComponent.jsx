@@ -9,7 +9,8 @@ import { contactCreatorAction } from '../../actions/action-creators';
 const mapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quoteInfo: state.quoteReducer.quoteInfo
+		quoteInfo: state.quoteReducer.quoteInfo,
+		contactInfo: state.quoteReducer.contactInfo
 	}
 }
 
@@ -28,29 +29,24 @@ const color = {
 
 const QuoteComponent = (props) => {
 
-	const [firstName, setFirstName ] = useState('');
-	const [lastName, setLastName ] = useState('');
-	const [phone, setPhone] = useState('');
-	const [email, setEmail] = useState('');
-	const [orderNumber, setOrderNumber] = useState('');
-	const [requestDate, setRequestDate] = useState('');
+	const [firstName, setFirstName ] = useState(props.contactInfo?.firstName);
+	const [lastName, setLastName ] = useState(props.contactInfo?.lastName);
+	const [phone, setPhone] = useState(props.contactInfo?.phone);
+	const [email, setEmail] = useState(props.contactInfo?.email);
+	const [orderNumber, setOrderNumber] = useState(props.contactInfo?.orderNumber);
+	const [requestDate, setRequestDate] = useState(props.contactInfo.requestDate);
 
-	const updateFirstName = (e) => {
-		setFirstName(e.target.value);
-	}
-	const updateLastName = (e) => {
-		setLastName(e.target.value);
-	}
-	const updatePhone = (e) => {
-		setPhone(e.target.value);
-	}
-
-	const updateEmail = (e) => {
-		setEmail(e.target.value);
-	}
+	const updateFirstName = (e) => { setFirstName(e.target.value); }
+	const updateLastName = (e) => {	setLastName(e.target.value); }
+	const updatePhone = (e) => { setPhone(e.target.value); }
+	const updateEmail = (e) => { setEmail(e.target.value); }
+	const updateOrder = (e) => { setOrderNumber(e.target.value); }
+	const updateDate = (e) =>  { setRequestDate(e.target.value); }
 
 	const buildQuote = () => {
 		let contactInfo = {
+			orderNumber: orderNumber,
+			requestDate: requestDate,
 			firstName: firstName,
 			lastName: lastName,
 			number: phone,
@@ -72,12 +68,12 @@ const QuoteComponent = (props) => {
 					<GridRow>
 						<GridColumn width='3'>
 							<div className="ui input" style={input}>
-								<input autoFocus tabIndex='1' placeholder='Order Number' value={orderNumber} />
+								<input autoFocus tabIndex='1' placeholder='Order Number' value={orderNumber} onChange={updateOrder} />
 							</div>
 						</GridColumn>
 						<GridColumn width='10'/>
 						<GridColumn width='3'>
-							<Input fluid tabIndex='2' type='date' label={{content:"Requested Date", color: 'grey'}} value={requestDate}/>
+							<Input tabIndex='2' type='date' label={{content:"Requested Date", color: 'grey'}} onChange={updateDate} value={requestDate} />
 						</GridColumn>
 						
 					</GridRow>
