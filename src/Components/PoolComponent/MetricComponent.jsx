@@ -36,9 +36,7 @@ const poolSizes = [
 
 const wallHeights = [
 	{ key: 1, text: '', value: '' },
-	{ key: 2, text: '42"', value: '42"' },
-	{ key: 3, text: '48"', value: '48"' },
-	{ key: 4, text: '52"', value: '52"' },
+	{ key: 2, text: '52"', value: '52"' },
   ]
 
 const MetricComponent = (props) => {
