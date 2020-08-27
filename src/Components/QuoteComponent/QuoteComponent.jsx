@@ -123,8 +123,8 @@ const QuoteComponent = (props) => {
 
 		return(
 			<>
-			{/* { !props.authUser ? <Redirect to="/home"/> : 
-			<> */}
+			{ !props.authUser ? <Redirect to="/home"/> : 
+			<>
 			<Segment raised>
 				<Grid padded="vertically">
 					<GridRow centered>
@@ -198,7 +198,7 @@ const QuoteComponent = (props) => {
 				</Segment>
 			</Segment>
 			
-			{/* </> } */}
+			</> }
 			</>
 		)
 }
