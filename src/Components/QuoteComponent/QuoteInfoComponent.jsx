@@ -13,7 +13,11 @@ const MapStateToProps = (state) => {
 
 const QuoteInfoComponent = (props) => {
 
-
+	let date = new Date()
+	let day = date.getDate();
+	let month = date.getMonth();
+	let year = date.getFullYear();
+	let currentDate = month + '/' + day + '/' + year;
 
 	return (
 		<>
@@ -26,6 +30,7 @@ const QuoteInfoComponent = (props) => {
 						<GridColumn>
 							<Header textAlign="left">Order Number: <Header sub size='huge'>{props.contactInfo?.orderNumber}</Header></Header>
 							<Header textAlign="left">Requested Date: <Header sub size='huge'>{props.contactInfo?.requestDate}</Header></Header>
+							<Header textAlign="left">Submitted Date: <Header sub size='huge'>{currentDate}</Header></Header>
 							<Header textAlign="left">Name: <Header sub size='huge'>{props.contactInfo?.firstName} {props.contactInfo?.lastName} </Header></Header>
 							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.contactInfo?.number} </Header></Header>
 							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.contactInfo?.email} </Header></Header>
