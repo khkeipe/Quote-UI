@@ -64,14 +64,6 @@ const LoginComponent = (props) => {
 							<GridRow centered>
 								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
 							</GridRow>
-							<GridRow>
-								<GridColumn width="10" verticalAlign="middle" textAlign="center">
-									<HeaderSubHeader >Don't have an account?</HeaderSubHeader>
-								</GridColumn>
-								<GridColumn width="6" textAlign="center">
-									<CreateUserComponent/>
-								</GridColumn>
-							</GridRow>
 						</Grid>
 						
 						{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
