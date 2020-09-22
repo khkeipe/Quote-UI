@@ -70,19 +70,11 @@ export const signUpAction = (email, password, passwordVerification) => async (di
 	}
 }
 
-export const contactCreatorAction = (contactInfo) => async (dispatch) => {
-	
-	dispatch({
-		type: SUCCESSFUL_CONTACT_CREATION,
-		payload: contactInfo
-	})
-}
-
-export const quoteCreatorAction = (quoteInfo) => async (dispatch) => {
+export const quoteCreatorAction = (quote) => async (dispatch) => {
 
 	dispatch({
 		type: SUCCESSFUL_QUOTE_CREATION,
-		payload: quoteInfo
+		payload: quote
 	})
 }
 

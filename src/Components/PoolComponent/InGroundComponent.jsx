@@ -5,10 +5,12 @@ import { getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { quoteCreatorAction } from '../../actions/action-creators';
+import { Quote } from '../../dtos/Quote';
+import { Pool } from '../../dtos/Pool';
 
 const MapStateToProps = (state) => {
 	return {
-		quoteInfo: state.quoteReducer.quoteInfo
+		quote: state.quoteReducer.quote
 	}
 }
 
@@ -49,15 +51,21 @@ const wallHeights = [
 
 const InGroundComponent = (props) => {
 
-	const [dealer, setDealer] = useState(props.quoteInfo?.dealer);
-	const [poolSize, setPoolSize] = useState(props.quoteInfo?.poolSize);
-	const [length, setLength] = useState(props.quoteInfo?.length);
-	const [width, setWidth] = useState(props.quoteInfo?.width);
-	const [poolType, setPoolType] = useState(props.quoteInfo?.poolType);
-	const [wallHeight, setWallHeight] = useState(props.quoteInfo?.wallHeight);
-	const [skimmer, setSkimmer] = useState(props.quoteInfo?.skimmer);
-	const [ladder, setLadder] = useState(props.quoteInfo?.ladder);
+	const [dealerName, setDealerName] = useState(props.quote?.dealer?.dealerName);
+	const [poolSize, setPoolSize] = useState(props.quote?.poolSize);
+	const [length, setLength] = useState(props.quote?.length);
+	const [width, setWidth] = useState(props.quote?.width);
+	const [poolType, setPoolType] = useState(props.quote?.poolType);
+	const [wallHeight, setWallHeight] = useState(props.quote?.wallHeight);
+	const [skimmer, setSkimmer] = useState(props.quote?.skimmer);
+	const [ladder, setLadder] = useState(props.quote?.ladder);
 	const [dealers, setDealers] = useState([]);
+
+	let dealer = getDealerByName();
+	let pool = new Pool(poolType, length, width, wallHeight);
+	let notes = ''
+
+	let quote = new Quote(props.quote?.orderNumber, props.quote?.requestDate, props.quote?.customer, dealer, pool, notes);
 
 	let quoteInfo = {
 		dealer: dealer,
@@ -143,7 +151,7 @@ const InGroundComponent = (props) => {
 
 		}
 		fetchDealers();
-		props.quoteCreatorAction(quoteInfo);
+		props.quoteCreatorAction(quote);
 	},[dealer, poolSize, length, width, poolType, skimmer, ladder, wallHeight])
 
 	return(

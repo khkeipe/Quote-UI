@@ -6,8 +6,7 @@ import { Link, Redirect } from 'react-router-dom';
 const MapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quoteInfo: state.quoteReducer.quoteInfo,
-		contactInfo: state.quoteReducer.contactInfo
+		quote: state.quoteReducer.quote
 	}
 }
 
@@ -28,13 +27,13 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header textAlign="left">Order Number: <Header sub size='huge'>{props.contactInfo?.orderNumber}</Header></Header>
-							<Header textAlign="left">Requested Date: <Header sub size='huge'>{props.contactInfo?.requestDate}</Header></Header>
+							<Header textAlign="left">Order Number: <Header sub size='huge'>{props.quote?.orderNumber}</Header></Header>
+							<Header textAlign="left">Requested Date: <Header sub size='huge'>{props.quote?.requestDate}</Header></Header>
 							<Header textAlign="left">Submitted Date: <Header sub size='huge'>{currentDate}</Header></Header>
-							<Header textAlign="left">Name: <Header sub size='huge'>{props.contactInfo?.firstName} {props.contactInfo?.lastName} </Header></Header>
-							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.contactInfo?.number} </Header></Header>
-							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.contactInfo?.email} </Header></Header>
-							<Header textAlign="left">Address: <Header sub size='huge'>{props.contactInfo?.street} {props.contactInfo?.city}, {props.contactInfo?.state} {props.contactInfo?.zip}</Header></Header>
+							<Header textAlign="left">Name: <Header sub size='huge'>{props.quote?.customer?.firstName} {props.quote?.customer?.lastName} </Header></Header>
+							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.quote?.customer?.phone} </Header></Header>
+							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.quote?.customer?.email} </Header></Header>
+							<Header textAlign="left">Address: <Header sub size='huge'>{props.quote?.customer?.street} {props.quote?.customer?.city}, {props.quote?.customer?.state} {props.quote?.customer?.zip}</Header></Header>
 						</GridColumn>
 					</GridRow>
 				</Grid>
@@ -45,14 +44,14 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header>Dealer: {props.quoteInfo?.dealer}</Header>
-							<Header>Pool Type: {props.quoteInfo?.poolType}</Header>
-							<Header>Pool Size: {props.quoteInfo?.poolSize}</Header>
-							<Header>Custom Length: {props.quoteInfo?.length}</Header>
-							<Header>Custom Width: {props.quoteInfo?.width}</Header>
-							<Header>Wall Height: {props.quoteInfo?.wallHeight}</Header>
-							<Header>Skimmer: {props.quoteInfo?.skimmer ? "Yes" : "No"}</Header>
-							<Header>Ladder: {props.quoteInfo?.ladder ? "Yes" : "No"}</Header>
+							<Header>Dealer: {props.quote?.dealer?.dealerName}</Header>
+							<Header>Pool Type: {props.quote?.poolType}</Header>
+							<Header>Pool Size: {props.quote?.poolSize}</Header>
+							<Header>Custom Length: {props.quote?.length}</Header>
+							<Header>Custom Width: {props.quote?.width}</Header>
+							<Header>Wall Height: {props.quote?.wallHeight}</Header>
+							<Header>Skimmer: {props.quote?.skimmer ? "Yes" : "No"}</Header>
+							<Header>Ladder: {props.quote?.ladder ? "Yes" : "No"}</Header>
 						</GridColumn>
 					</GridRow>
 				</Grid>
