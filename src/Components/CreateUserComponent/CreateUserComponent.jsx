@@ -37,6 +37,14 @@ const CreateUserComponent = (props) => {
 		setPasswordTwo(e.target.value);
 	}
 
+	const signUp = async () => {
+		props.signUpAction(email, password, passwordTwo);
+	}
+
+	// const login = () => {
+	// 	props.loginAction(newUser.email, newUser.password);
+	// }
+
 	const input = {
 		'width': '100%'
 	}
