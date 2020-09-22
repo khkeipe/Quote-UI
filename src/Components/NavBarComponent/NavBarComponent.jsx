@@ -16,7 +16,8 @@ const mapDispatchToProps = {
 }
 
 const head = {
-	'content': 'middle'
+	'content': 'middle',
+	'padding-right': '2em',
 }
 
 const NavBarComponent = (props) => { 
@@ -32,6 +33,9 @@ const NavBarComponent = (props) => {
 					<Menu inverted borderless="true">
 						<MenuItem>
 						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
+						{ props.authUser?.role == 'Admin' ?
+						<Link to="/dashboard"><Header inverted style={head}>DASHBOARD</Header></Link>
+						: <></> }
 
 						</MenuItem>
 						<MenuMenu position="right">
