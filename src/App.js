@@ -4,6 +4,7 @@ import NavBarComponent from './Components/NavBarComponent/NavBarComponent';
 import QuoteComponent from './Components/QuoteComponent/QuoteComponent';
 import HomeComponent from './Components/HomeComponent/HomeComponent';
 import QuoteInfoComponent from './Components/QuoteComponent/QuoteInfoComponent';
+import DashboardComponent from './Components/Dashboard Component/DashboardComponent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path="/home" render={() => <HomeComponent /> } />
 				<Route path="/form" render={() => <QuoteComponent/> } />
 				<Route path="/quote" render={() => <QuoteInfoComponent/> } />
+				<Route path="/dashboard" render={() => <DashboardComponent/> } />
 
 			</Switch>
 		</Router>
