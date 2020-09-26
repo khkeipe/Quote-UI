@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { quoteCreatorAction } from '../../actions/action-creators';
+import { quoteUpdateAction } from '../../actions/action-creators';
 import { Quote } from '../../dtos/Quote';
 import { Pool } from '../../dtos/Pool';
 
@@ -15,7 +15,7 @@ const MapStateToProps = (state) => {
 }
 
 const MapDispatchToProps = {
-	quoteCreatorAction
+	quoteUpdateAction
 }
 
 const poolTypes = [
@@ -51,7 +51,7 @@ const wallHeights = [
 
 const InGroundComponent = (props) => {
 
-	const [dealerName, setDealerName] = useState(props.quote?.dealer?.dealerName);
+	const [dealer, setDealer] = useState(props.quote?.dealer?.dealerName);
 	const [poolSize, setPoolSize] = useState(props.quote?.poolSize);
 	const [length, setLength] = useState(props.quote?.length);
 	const [width, setWidth] = useState(props.quote?.width);
@@ -61,7 +61,7 @@ const InGroundComponent = (props) => {
 	const [ladder, setLadder] = useState(props.quote?.ladder);
 	const [dealers, setDealers] = useState([]);
 
-	let dealer = getDealerByName();
+	
 	let pool = new Pool(poolType, length, width, wallHeight);
 	let notes = ''
 
@@ -151,7 +151,7 @@ const InGroundComponent = (props) => {
 
 		}
 		fetchDealers();
-		props.quoteCreatorAction(quote);
+		props.quoteUpdateAction(quote);
 	},[dealer, poolSize, length, width, poolType, skimmer, ladder, wallHeight])
 
 	return(

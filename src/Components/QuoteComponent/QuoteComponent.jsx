@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import PoolComponent from '../PoolComponent/PoolComponent';
-import { quoteCreatorAction } from '../../actions/action-creators';
+import { quoteUpdateAction } from '../../actions/action-creators';
 import { Customer } from '../../dtos/Customer';
 import { Quote } from '../../dtos/Quote';
 
@@ -70,7 +70,7 @@ const states = [
 ]
 
 const mapDispatchToProps = {
-	quoteCreatorAction
+	quoteUpdateAction
 }
 
 const input = {
@@ -111,7 +111,7 @@ const QuoteComponent = (props) => {
 		let customer = new Customer(firstName, lastName, phone, email, street, city, state, zip);
 		let quote = new Quote(orderNumber, requestDate, customer, props.quote?.dealer, props.quote?.pool, props.quote?.notes);
 
-		props.quoteCreatorAction(quote);
+		props.quoteUpdateAction(quote);
 	}
 
 		return(
