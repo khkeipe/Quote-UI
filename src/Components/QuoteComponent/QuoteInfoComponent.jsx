@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Header, Segment, Grid, GridRow, GridColumn, Button } from 'semantic-ui-react';
+import { Header, Segment, Grid, GridRow, GridColumn, Button, Message } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
+import { quoteCreatorAction } from '../../actions/action-creators';
 
 const MapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quote: state.quoteReducer.quote
+		quote: state.quoteReducer.quote,
+		errorMessage: state.quoteReducer.errorMessage
 	}
 }
 
+const MapDispatchToProps = {
+	quoteCreatorAction
+}
+
 const QuoteInfoComponent = (props) => {
+
+	const [isError, setIsError] = useState(true);
+	const [submitted, setSubmitted] = useState(false);
+
+	const createQuote = () => {
+		props.quoteCreatorAction(props.quote);
+		setSubmitted(true);	
+	}
 
 	let date = new Date()
 	let day = date.getDate();
@@ -58,11 +72,18 @@ const QuoteInfoComponent = (props) => {
 
 					<Segment inverted textAlign='center' padded>
 						<Link to="/form"><Button inverted color='grey'> Back</Button></Link>
-						<Link><Button inverted color='grey'> Submit</Button></Link>
+						{ props.errorMessage | submitted == true ?
+						<Button disabled inverted color='grey'> Submit</Button> :
+						<Button onClick={createQuote} inverted color='grey'> Submit</Button> }
+					</Segment>
+					<Segment inverted textAlign='center' padded>
+						{ props.errorMessage ?
+						<Message negative >{props.errorMessage}</Message> 
+						: <Message></Message>}
 					</Segment>
 			</Segment>
 		</>
 	)
 }
 
-export default connect(MapStateToProps)(QuoteInfoComponent);
+export default connect(MapStateToProps, MapDispatchToProps)(QuoteInfoComponent);
