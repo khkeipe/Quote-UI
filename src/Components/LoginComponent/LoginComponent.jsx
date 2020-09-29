@@ -48,7 +48,7 @@ const LoginComponent = (props) => {
 		<> 
 			<Modal size="mini" 
 					trigger=
-					{<Button inverted>LOGIN</Button>}
+					{<Button inverted >LOGIN</Button>}
 					>
 				<ModalHeader>LOGIN</ModalHeader>
 				<ModalContent>
@@ -62,7 +62,7 @@ const LoginComponent = (props) => {
 						</FormField>
 						<Grid>
 							<GridRow centered>
-								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
+								<Button type='submit' color='black' onClick={login}>LOGIN</Button>
 							</GridRow>
 						</Grid>
 						
