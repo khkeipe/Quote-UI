@@ -33,10 +33,9 @@ const NavBarComponent = (props) => {
 					<Menu inverted borderless="true">
 						<MenuItem>
 						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
-						{ props.authUser?.role == 'Admin' ?
+						{ props.authUser ?
 						<Link to="/dashboard"><Header inverted style={head}>DASHBOARD</Header></Link>
 						: <></> }
-
 						</MenuItem>
 						<MenuMenu position="right">
 						{ !props.authUser ? 
