@@ -79,7 +79,7 @@ const QuoteInfoComponent = (props) => {
 					<Segment inverted textAlign='center' padded>
 						{ props.errorMessage ?
 						<Message negative >{props.errorMessage}</Message> 
-						: <Message></Message>}
+						: <></>}
 					</Segment>
 			</Segment>
 		</>
