@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Divider, Grid, GridRow, Header, Segment } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
+import CreateUserComponent from '../CreateUserComponent/CreateUserComponent';
 
 const mapStateToProps = (state) => {
 	return{
@@ -34,15 +35,23 @@ const DashboardComponent = (props) => {
 						<HeaderSubHeader as="h2" style={headerSub}> Dashboard </HeaderSubHeader>
 					</GridRow>
 					<Divider/>
-					{ props.authUser?.role == 'Admin' ?
-					<GridRow>
-
+					{ props.authUser?.role == 'Admin' ?	
+					//Admin View
+					<GridRow centered>
+						<Link to="/form"> <Button color='black' size="huge">New Quote</Button> </Link>
+						<Link to="/history"> <Button color='black' size="huge">Quote Hisotry</Button> </Link>
+						<Divider/>
+						<CreateUserComponent/>
+						<Link to="/users"> <Button color='black' size="huge">View Users</Button> </Link>
 					</GridRow>
-					: <></> }
+					: 
+					//AppUser View
+					<>
 					<GridRow centered>
 						<Link to="/form"> <Button color='black' size="huge">New Quote</Button> </Link>
 						<Link to="/history"> <Button color='black' size="huge">Quote Hisotry</Button> </Link>
 					</GridRow>
+					</> }
 				</Grid>
 			</Segment>
 		
