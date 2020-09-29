@@ -53,9 +53,9 @@ const CreateUserComponent = (props) => {
 		<>
 		<Modal size="mini" 
 					trigger=
-					{<Button>Sign Up</Button>}
+					{<Button color="black" size="huge">Add User</Button>}
 					>
-				<ModalHeader>Sign Up</ModalHeader>
+				<ModalHeader>Add User</ModalHeader>
 				<ModalContent>
 					<Form>
 						<div className="ui left icon input" style={input}>
