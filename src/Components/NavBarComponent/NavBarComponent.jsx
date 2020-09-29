@@ -32,7 +32,6 @@ const NavBarComponent = (props) => {
 				<Segment inverted>
 					<Menu inverted borderless="true">
 						<MenuItem>
-						<Link to="/home"><Header inverted style={head}>HOME</Header></Link>
 						{ props.authUser ?
 						<Link to="/dashboard"><Header inverted style={head}>DASHBOARD</Header></Link>
 						: <></> }
