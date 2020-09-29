@@ -16,11 +16,10 @@ const headerMain = {
 	'fontWeight': 'bold'
 }
 
-const headerSub = {
-	'fontSize': '1.7em',
-	'marginTop': '1.5em'
+const head = {
+	'content': 'middle',
+	'padding-right': '2em',
 }
-
 
 const HomeComponent = (props) => {
 
@@ -28,18 +27,16 @@ const HomeComponent = (props) => {
 		<>
 			<Segment textAlign="center" size="large" vertical padded="very">
 				<Header as="h1" style={headerMain}>Super Awesome Pools</Header>
-				<HeaderSubHeader as="h2" style={headerSub}> Get a free quote today! </HeaderSubHeader>
 				{props.authUser ? 
 				<>
-				<Link to="/form"> <Button size="huge">Start a Quote</Button> </Link>
+					<Link to="/dashboard"><Button color='black' size="huge"> DASHBOARD</Button></Link>
 				</> :
 				<Container>
-					<Message info="true" > Log-in to start a quote! </Message>
+					<Message info="true" > Log-in to get started </Message>
 				</Container>
 				}
 			</Segment>
 
-			
 			<FooterComponent/>
 		</>
 	)
