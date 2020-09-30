@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label } from 'semantic-ui-react';
 import { useState } from 'react';
-import { getDealers } from '../../remote/dealer-service';
+import { getAllDealers, getDealers } from '../../remote/dealer-service';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { quoteUpdateAction } from '../../actions/action-creators';
@@ -141,7 +141,7 @@ const InGroundComponent = (props) => {
 
 		let dealerArray = [];
 
-		let response = await getDealers();
+		let response = await getAllDealers();
 			for(let item of response) {
 				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
 				dealerArray.push(nextDealer);

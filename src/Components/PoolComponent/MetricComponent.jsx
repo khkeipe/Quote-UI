@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { quoteCreatorAction } from '../../actions/action-creators';
-import { getDealers } from '../../remote/dealer-service';
+import { getAllDealers, getDealers } from '../../remote/dealer-service';
 
 
 const MapStateToProps = (state) => {
@@ -125,7 +125,7 @@ const MetricComponent = (props) => {
 
 		let dealerArray = [];
 
-		let response = await getDealers();
+		let response = await getAllDealers();
 			for(let item of response) {
 				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
 				dealerArray.push(nextDealer);

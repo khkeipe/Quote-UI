@@ -60,11 +60,11 @@ const CreateUserComponent = (props) => {
 							<i className="user icon"/>
 						</div>
 					</GridColumn>
-				<GridColumn width="6">
-					<Input icon="key" iconPosition="left" placeholder='Password' type='password' onChange={updatePassword} value={password}/>
+				<GridColumn width="5">
+					<Input icon="key" fluid iconPosition="left" placeholder='Password' type='password' onChange={updatePassword} value={password}/>
 				</GridColumn>
-				<GridColumn width="6">
-					<Input icon="key" iconPosition="left" placeholder='Verify Password' type='password' onChange={updatePasswordTwo} value={passwordTwo}/>
+				<GridColumn width="5">
+					<Input icon="key" fluid iconPosition="left" placeholder='Verify Password' type='password' onChange={updatePasswordTwo} value={passwordTwo}/>
 				</GridColumn>
 				</GridRow>
 				<GridRow centered>
