@@ -18,3 +18,8 @@ export async function createNewUser(email, password, passwordVerification) {
 
 	return response.data;
 }
+
+export async function getUserById(id) {
+	let response = await client.get(`/users/${id}`);
+	return response.data;
+}
