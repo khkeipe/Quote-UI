@@ -5,7 +5,7 @@ const initialState = {
 	errorMessage: ''
 }
 
-export const signUpReducer = (state = initialState, action) => {
+export const createUserReducer = (state = initialState, action) => {
 
 	switch(action.type) {
 		case SUCCESSFUL_SIGNUP:
