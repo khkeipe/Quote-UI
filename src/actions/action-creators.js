@@ -48,10 +48,10 @@ export const logoutAction = () => async (dispatch) => {
 	})
 }
 
-export const createUserAction = (email, password, passwordVerification) => async (dispatch) => {
+export const createUserAction = (email, password, role, dealer) => async (dispatch) => {
 	
 	try {
-	let result = await createNewUser(email, password, passwordVerification);
+	let result = await createNewUser(email, password, role, dealer);
 	dispatch({
 		type: SUCCESSFUL_LOGIN,
 		payload: result
