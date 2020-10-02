@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { loginAction } from '../../actions/action-creators';
 import { createUserAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
-import { Modal, Button, Input, Grid, GridRow, FormButton, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
+import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
 import { getAllDealers } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
-			 errorMessage: state.createUserReducer.errorMessage }
+			 errorMessage: state.userReducer.errorMessage }
 };
 
 const mapDispatchToProps = {
@@ -21,7 +21,7 @@ const CreateUserComponent = (props) => {
 	const [password, setPassword] = useState('');
 	const [passwordTwo, setPasswordTwo] = useState('');
 	const [dealer, setDealer] = useState('');
-	const [dealers, setDealers] = useState([]);
+	const [dealerList, setDealersList] = useState([]);
 
 	useEffect(() => {
 	
@@ -35,11 +35,11 @@ const CreateUserComponent = (props) => {
 				dealerArray.push(nextDealer);
 			}
 		
-			setDealers(dealerArray);
+			setDealersList(dealerArray);
 
 		}
 		fetchDealers();
-	},[dealers])
+	},[dealerList])
 
 	window.onkeypress = (event) => {
 		let key = event.key.toUpperCase();
@@ -94,11 +94,11 @@ const CreateUserComponent = (props) => {
 				</GridRow>
 				<GridRow>
 					<GridColumn width='4'>
-						<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealers} selection onChange={updateDropdown}/>
+						<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealerList} selection onChange={updateDropdown}/>
 					</GridColumn>
 				</GridRow>
 				<GridRow centered>
-					<Button color='black' onClick={signUp}> Create </Button>
+					<Button color='black' onClick={signUp}> Save </Button>
 				</GridRow>
 				<GridRow>				
 					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }

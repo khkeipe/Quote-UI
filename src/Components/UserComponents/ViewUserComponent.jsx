@@ -3,11 +3,28 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment } from 'semantic-ui-react';
-import { getAllUsers } from '../../remote/user-service';
+import { getAllUsers, getUserById } from '../../remote/user-service';
+import { userReducer } from '../../reducers/user-reducer';
 
-const ViewUserComponent = () => {
+const MapStatToProps = (state) => {
+	return {
+		user: state.userReducer.user
+	}
+}
+
+const MapDispatchToProps = {
+	userReducer
+}
+
+const ViewUserComponent = (props) => {
 
 	const [users, setUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState(null);
+
+	const getUserInfo = async (user) => {
+		let result = await getUserById(user.id);
+		setSelectedUser(result);
+	}
 
 	useEffect(() => {
 
@@ -30,7 +47,7 @@ const ViewUserComponent = () => {
 
 							</CardContent>
 							<CardContent textAlign='center'>
-								<Link> <Button basic color='yellow'> Update </Button> </Link>
+								<Link> <Button onClick={getUserInfo(user)} basic color='yellow'> Update </Button> </Link>
 								<Link> <Button basic color='red'> Delete </Button> </Link>
 							</CardContent>
 						</Card>
@@ -59,4 +76,4 @@ const ViewUserComponent = () => {
 	)
 }
 
-export default connect()(ViewUserComponent);
+export default connect(MapStatToProps, MapDispatchToProps)(ViewUserComponent);
