@@ -1,4 +1,11 @@
-import { SUCCESSFUL_LOGIN, FAILED_BAD_REQUEST, FAILED_INVALID_REQUEST, FAILED_INTERNAL_SERVER_ERROR, SUCCESSFUL_LOGOUT, SUCCESSFUL_QUOTE_CREATION, QUOTE_UPDATE } from "./action-types";
+import { SUCCESSFUL_LOGIN, 
+	FAILED_BAD_REQUEST, 
+	FAILED_INVALID_REQUEST, 
+	FAILED_INTERNAL_SERVER_ERROR, 
+	SUCCESSFUL_LOGOUT, 
+	SUCCESSFUL_QUOTE_CREATION, 
+	QUOTE_UPDATE, 
+	USER_UPDATE } from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
 import { createNewUser } from "../remote/user-service";
@@ -75,6 +82,13 @@ export const quoteUpdateAction = (quote) => async (dispatch) => {
 	dispatch({
 		type: QUOTE_UPDATE,
 		payload: quote
+	});
+}
+
+export const userUpdateAction = (user) => async (dispatch) => {
+	dispatch({
+		type: USER_UPDATE,
+		payload: user
 	});
 }
 
