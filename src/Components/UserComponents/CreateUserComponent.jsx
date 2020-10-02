@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loginAction } from '../../actions/action-creators';
-import { signUpAction } from '../../actions/action-creators';
+import { createUserAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
-import { Modal, Button, Input, Grid, GridRow, FormButton, Message, Segment, Divider, GridColumn, Header } from 'semantic-ui-react';
+import { Modal, Button, Input, Grid, GridRow, FormButton, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
+import { getAllDealers } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
-			 errorMessage: state.signUpReducer.errorMessage }
+			 errorMessage: state.createUserReducer.errorMessage }
 };
 
 const mapDispatchToProps = {
 	loginAction,
-	signUpAction
+	createUserAction
 }
 
 const CreateUserComponent = (props) => {
@@ -19,6 +20,26 @@ const CreateUserComponent = (props) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordTwo, setPasswordTwo] = useState('');
+	const [dealer, setDealer] = useState('');
+	const [dealers, setDealers] = useState([]);
+
+	useEffect(() => {
+	
+		const fetchDealers = async () => {
+
+		let dealerArray = [];
+
+		let response = await getAllDealers();
+			for(let item of response) {
+				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
+				dealerArray.push(nextDealer);
+			}
+		
+			setDealers(dealerArray);
+
+		}
+		fetchDealers();
+	},[dealers])
 
 	window.onkeypress = (event) => {
 		let key = event.key.toUpperCase();
@@ -35,6 +56,10 @@ const CreateUserComponent = (props) => {
 	}
 	let updatePasswordTwo = (e) => {
 		setPasswordTwo(e.target.value);
+	}
+
+	const updateDropdown = (e, data) => {
+		setDealer(data.value);
 	}
 
 	const signUp = async () => {
@@ -67,8 +92,13 @@ const CreateUserComponent = (props) => {
 					<Input icon="key" fluid iconPosition="left" placeholder='Verify Password' type='password' onChange={updatePasswordTwo} value={passwordTwo}/>
 				</GridColumn>
 				</GridRow>
+				<GridRow>
+					<GridColumn width='4'>
+						<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealers} selection onChange={updateDropdown}/>
+					</GridColumn>
+				</GridRow>
 				<GridRow centered>
-					<FormButton type='submit' onClick={signUp}>Create</FormButton>
+					<Button color='black' onClick={signUp}> Create </Button>
 				</GridRow>
 				<GridRow>				
 					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
