@@ -41,7 +41,7 @@ export const logoutAction = () => async (dispatch) => {
 	})
 }
 
-export const signUpAction = (email, password, passwordVerification) => async (dispatch) => {
+export const createUserAction = (email, password, passwordVerification) => async (dispatch) => {
 	
 	try {
 	let result = await createNewUser(email, password, passwordVerification);
