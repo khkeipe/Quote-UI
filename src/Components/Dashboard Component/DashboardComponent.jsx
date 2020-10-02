@@ -61,7 +61,7 @@ const DashboardComponent = (props) => {
 					//AppUser View
 					<>
 						<GridRow centered>
-							<Link to="/form"> <Button color='black' size="huge">New Quote</Button> </Link>
+							<Link to="/quote-form"> <Button color='black' size="huge">New Quote</Button> </Link>
 							<Link to="/quotes"> <Button color='black' size="huge">Quote Hisotry</Button> </Link>
 						</GridRow>
 					</> }
