@@ -17,7 +17,7 @@ const mapDispatchToProps = {
 
 const head = {
 	'content': 'middle',
-	'padding-right': '2em',
+	'paddingRight': '2em',
 }
 
 const NavBarComponent = (props) => { 

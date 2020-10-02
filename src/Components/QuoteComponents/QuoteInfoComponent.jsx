@@ -71,7 +71,7 @@ const QuoteInfoComponent = (props) => {
 				</Grid>
 
 					<Segment inverted textAlign='center' padded>
-						<Link to="/form"><Button inverted color='grey'> Back</Button></Link>
+						<Link to="/quote-form"><Button inverted color='grey'> Back</Button></Link>
 						{ props.errorMessage | submitted == true ?
 						<Button disabled inverted color='grey'> Submit</Button> :
 						<Button onClick={createQuote} inverted color='grey'> Submit</Button> }

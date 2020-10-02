@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment } from 'semantic-ui-react';
 import { getAllUsers, getUserById } from '../../remote/user-service';
-import { userReducer } from '../../reducers/user-reducer';
+import { userUpdateAction } from '../../actions/action-creators';
 
 const MapStatToProps = (state) => {
 	return {
@@ -13,17 +13,17 @@ const MapStatToProps = (state) => {
 }
 
 const MapDispatchToProps = {
-	userReducer
+	userUpdateAction
 }
 
 const ViewUserComponent = (props) => {
 
 	const [users, setUsers] = useState([]);
-	const [selectedUser, setSelectedUser] = useState(null);
 
 	const getUserInfo = async (user) => {
-		let result = await getUserById(user.id);
-		setSelectedUser(result);
+		console.log(user);
+		// let selectedUser = getUserById(userId);
+		// userUpdateAction(selectedUser);
 	}
 
 	useEffect(() => {
@@ -47,7 +47,7 @@ const ViewUserComponent = (props) => {
 
 							</CardContent>
 							<CardContent textAlign='center'>
-								<Link> <Button onClick={getUserInfo(user)} basic color='yellow'> Update </Button> </Link>
+								<Link> <Button onClick={getUserInfo(nextUser)} basic color='yellow'> Update </Button> </Link>
 								<Link> <Button basic color='red'> Delete </Button> </Link>
 							</CardContent>
 						</Card>

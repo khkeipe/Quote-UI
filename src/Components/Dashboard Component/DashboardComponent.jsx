@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Divider, Grid, GridRow, Header, Segment } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
-import CreateUserComponent from '../UserComponents/CreateUserComponent';
 
 const mapStateToProps = (state) => {
 	return{
@@ -39,7 +38,7 @@ const DashboardComponent = (props) => {
 					//Admin View
 					<>
 						<GridRow centered>
-							<Link to="/form"> <Button color='black' size="huge">New Quote</Button> </Link>
+							<Link to="/quote-form"> <Button color='black' size="huge">New Quote</Button> </Link>
 							<Link to="/quotes"> <Button color='black' size="huge">Quote Hisotry</Button> </Link>
 						</GridRow>
 						<Divider/>

@@ -49,7 +49,7 @@ const wallHeights = [
 	{ key: 4, text: '52"', value: '52"' },
   ]
 
-const PoolFormComponent = (props) => {
+const QuoteFormComponent = (props) => {
 
 	const [dealer, setDealer] = useState(props.quote?.dealer?.dealerName);
 	const [poolSize, setPoolSize] = useState(props.quote?.poolSize);
@@ -197,4 +197,4 @@ const PoolFormComponent = (props) => {
 	)
 }
 
-export default connect(MapStateToProps, MapDispatchToProps)(PoolFormComponent);
+export default connect(MapStateToProps, MapDispatchToProps)(QuoteFormComponent);

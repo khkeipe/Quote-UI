@@ -3,7 +3,7 @@ import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label, Divid
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
-import PoolComponent from '../PoolComponent/PoolComponent';
+import QuoteFormComponent from '../QuoteComponents/QuoteFormComponent';
 import { quoteUpdateAction } from '../../actions/action-creators';
 import { Customer } from '../../dtos/Customer';
 import { Quote } from '../../dtos/Quote';
@@ -177,7 +177,7 @@ const QuoteComponent = (props) => {
 					<Divider/>
 
 					<GridRow centered>
-						<PoolComponent/>
+						<QuoteFormComponent/>
 					</GridRow>
 
 					<GridRow centered>
