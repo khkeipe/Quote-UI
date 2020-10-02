@@ -113,13 +113,12 @@ const CreateUserComponent = (props) => {
 						<Dropdown fluid name="role" placeholder="Role" defaultValue={role} options={roleList} selection onChange={updateRole}/>
 					</GridColumn>
 				</GridRow>
-				<GridRow centered>
-					<Button color='black' onClick={signUp}> Save </Button>
-				</GridRow>
-				<GridRow>				
-					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
-				</GridRow>
+				
 			</Grid>
+				<Segment inverted padded textAlign='center'>
+					<Button color='black' inverted size='large' onClick={signUp}> Save </Button>
+					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
+				</Segment>
 		</Segment>
 		</>
 	)
