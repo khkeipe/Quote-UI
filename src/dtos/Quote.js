@@ -2,9 +2,9 @@ export class Quote {
 
 	constructor(orderNumber, reqDate, customer, dealer, pool, notes) {
 		this. orderNumber = orderNumber;
-		this.reqDate = reqDate;
-		this.customer = customer;
-		this.dealer = dealer;
+		this.requestDate = reqDate;
+		this.quoteCustomer = customer;
+		this.quoteDealer = dealer;
 		this.pool = pool;
 		this.notes = notes
 	}
