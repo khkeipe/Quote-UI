@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment } from 'semantic-ui-react';
+import { Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Header, Message, Segment } from 'semantic-ui-react';
 import { getAllQuotes } from '../../remote/quote-service';
 
 const QuoteHistoryComponent = () => {
@@ -15,17 +15,24 @@ const QuoteHistoryComponent = () => {
 
 		let response = await getAllQuotes();
 			for(let quote of response) {
-				let nextQuote = {key: quote.id, order: quote.orderNumber, customer: quote.customer, date: quote.reqDate, dealer: quote.dealer};
+				let nextQuote = {
+					key: quote.id, order: quote.orderNumber, 
+					date: quote.requestDate, 
+					customer: quote.quoteCustomer?.email, 
+					dealer: quote.quoteDealer?.dealerName };
 				quoteArray.push(
 					<Card centered fluid>
 					<CardHeader as='h2'>
-						{nextQuote.order}
+						Order Number: {nextQuote.order}
 					</CardHeader>
 					<CardMeta>
 						Requested Date: {nextQuote.date}
 					</CardMeta>
 					<CardContent>
-						Dealer: {nextQuote.dealer}
+						<Header as='h3'>Dealer:</Header> {nextQuote.dealer}
+					</CardContent>
+					<CardContent>
+						<Header as='h3'>Customer E-Mail: </Header> {nextQuote.customer}
 					</CardContent>
 				</Card>);
 			}
