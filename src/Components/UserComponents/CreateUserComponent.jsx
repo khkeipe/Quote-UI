@@ -3,7 +3,7 @@ import { loginAction } from '../../actions/action-creators';
 import { createUserAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
-import { getAllDealers } from '../../remote/dealer-service';
+import { getAllDealers, getDealerByName } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -22,6 +22,12 @@ const CreateUserComponent = (props) => {
 	const [passwordTwo, setPasswordTwo] = useState('');
 	const [dealer, setDealer] = useState('');
 	const [dealerList, setDealersList] = useState([]);
+	const [role, setRole] = useState('');
+
+	const roleList = [
+		{key: 'Admin', text: 'Admin', value: 'Admin'}, 
+		{key: 'User', text: 'User', value: 'User'}
+	];
 
 	useEffect(() => {
 	
@@ -62,8 +68,15 @@ const CreateUserComponent = (props) => {
 		setDealer(data.value);
 	}
 
+	const updateRole = (e, data) => {
+		setRole(data.value);
+	}
+
 	const signUp = async () => {
-		props.signUpAction(email, password, passwordTwo);
+		if(password == passwordTwo){
+			let selectedDealer = await getDealerByName(dealer);
+			props.createUserAction(email, password, role, selectedDealer);
+		}
 	}
 
 	const input = {
@@ -95,6 +108,9 @@ const CreateUserComponent = (props) => {
 				<GridRow>
 					<GridColumn width='4'>
 						<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealerList} selection onChange={updateDropdown}/>
+					</GridColumn>
+					<GridColumn width='4'>
+						<Dropdown fluid name="role" placeholder="Role" defaultValue={role} options={roleList} selection onChange={updateRole}/>
 					</GridColumn>
 				</GridRow>
 				<GridRow centered>
