@@ -4,7 +4,7 @@ import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
-import CreateUserComponent from '../CreateUserComponent/CreateUserComponent';
+import CreateUserComponent from '../UserComponents/CreateUserComponent';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -48,7 +48,7 @@ const LoginComponent = (props) => {
 		<> 
 			<Modal size="mini" 
 					trigger=
-					{<Button inverted>LOGIN</Button>}
+					{<Button inverted >LOGIN</Button>}
 					>
 				<ModalHeader>LOGIN</ModalHeader>
 				<ModalContent>
@@ -62,15 +62,7 @@ const LoginComponent = (props) => {
 						</FormField>
 						<Grid>
 							<GridRow centered>
-								<FormButton type='submit' onClick={login}>LOGIN</FormButton>
-							</GridRow>
-							<GridRow>
-								<GridColumn width="10" verticalAlign="middle" textAlign="center">
-									<HeaderSubHeader >Don't have an account?</HeaderSubHeader>
-								</GridColumn>
-								<GridColumn width="6" textAlign="center">
-									<CreateUserComponent/>
-								</GridColumn>
+								<Button type='submit' color='black' onClick={login}>LOGIN</Button>
 							</GridRow>
 						</Grid>
 						

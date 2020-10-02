@@ -1,13 +1,22 @@
-import { SUCCESSFUL_SIGNUP, FAILED_INVALID_REQUEST, FAILED_BAD_REQUEST, FAILED_INTERNAL_SERVER_ERROR } from '../actions/action-types';
+import { SUCCESSFUL_SIGNUP, 
+	FAILED_INVALID_REQUEST, 
+	FAILED_BAD_REQUEST, 
+	FAILED_INTERNAL_SERVER_ERROR, 
+	USER_UPDATE } from '../actions/action-types';
 
 const initialState = {
 	authUser: null,
 	errorMessage: ''
 }
 
-export const signUpReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
 
 	switch(action.type) {
+		case USER_UPDATE:
+			return {
+				...state,
+				user: action.payload
+			}
 		case SUCCESSFUL_SIGNUP:
 			return {
 				...state,

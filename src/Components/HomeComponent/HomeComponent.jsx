@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button, Header, Segment, Message, Container } from 'semantic-ui-react';
-import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
 import FooterComponent from '../FooterComponent/FooterComponent';
 
 const mapStateToProps = (state) => {
@@ -16,30 +15,23 @@ const headerMain = {
 	'fontWeight': 'bold'
 }
 
-const headerSub = {
-	'fontSize': '1.7em',
-	'marginTop': '1.5em'
-}
-
-
 const HomeComponent = (props) => {
 
 	return (
 		<>
 			<Segment textAlign="center" size="large" vertical padded="very">
-				<Header as="h1" style={headerMain}>Super Awesome Pools</Header>
-				<HeaderSubHeader as="h2" style={headerSub}> Get a free quote today! </HeaderSubHeader>
+				<Header as="h1" style={headerMain}>Radiant Pool Quote Creator</Header>
 				{props.authUser ? 
 				<>
-				<Link to="/form"> <Button size="huge">Start a Quote</Button> </Link>
+					<Redirect to='/dashboard'/>
+					<Link to="/dashboard"><Button color='black' size="huge"> DASHBOARD</Button></Link>
 				</> :
 				<Container>
-					<Message info="true" > Log-in to start a quote! </Message>
+					<Message info="true" > Log-in to get started </Message>
 				</Container>
 				}
 			</Segment>
 
-			
 			<FooterComponent/>
 		</>
 	)

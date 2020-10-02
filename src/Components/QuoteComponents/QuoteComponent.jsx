@@ -3,14 +3,15 @@ import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Label, Divid
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
-import PoolComponent from '../PoolComponent/PoolComponent';
-import { contactCreatorAction } from '../../actions/action-creators';
+import QuoteFormComponent from '../QuoteComponents/QuoteFormComponent';
+import { quoteUpdateAction } from '../../actions/action-creators';
+import { Customer } from '../../dtos/Customer';
+import { Quote } from '../../dtos/Quote';
 
 const mapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quoteInfo: state.quoteReducer.quoteInfo,
-		contactInfo: state.quoteReducer.contactInfo
+		quote: state.quoteReducer.quote
 	}
 }
 
@@ -69,7 +70,7 @@ const states = [
 ]
 
 const mapDispatchToProps = {
-	contactCreatorAction
+	quoteUpdateAction
 }
 
 const input = {
@@ -83,16 +84,16 @@ const color = {
 
 const QuoteComponent = (props) => {
 
-	const [firstName, setFirstName ] = useState(props.contactInfo?.firstName);
-	const [lastName, setLastName ] = useState(props.contactInfo?.lastName);
-	const [phone, setPhone] = useState(props.contactInfo?.number);
-	const [email, setEmail] = useState(props.contactInfo?.email);
-	const [street, setStreet] = useState(props.contactInfo?.street);
-	const [city, setCity] = useState(props.contactInfo?.city);
-	const [state, setState] = useState(props.contactInfo?.state);
-	const [zip, setZip] = useState(props.contactInfo?.zip);
-	const [orderNumber, setOrderNumber] = useState(props.contactInfo?.orderNumber);
-	const [requestDate, setRequestDate] = useState(props.contactInfo.requestDate);
+	const [firstName, setFirstName ] = useState(props.quote?.customer?.firstName);
+	const [lastName, setLastName ] = useState(props.quote?.customer?.lastName);
+	const [phone, setPhone] = useState(props.quote?.customer?.phone);
+	const [email, setEmail] = useState(props.quote?.customer?.email);
+	const [street, setStreet] = useState(props.quote?.customer?.street);
+	const [city, setCity] = useState(props.quote?.customer?.city);
+	const [state, setState] = useState(props.quote?.customer?.state);
+	const [zip, setZip] = useState(props.quote?.customer?.zip);
+	const [orderNumber, setOrderNumber] = useState(props.quote?.orderNumber);
+	const [requestDate, setRequestDate] = useState(props.quote?.requestDate);
 
 	const updateFirstName = (e) => { setFirstName(e.target.value); }
 	const updateLastName = (e) => {	setLastName(e.target.value); }
@@ -106,19 +107,11 @@ const QuoteComponent = (props) => {
 	const updateState = (e, data) => {setState(data.value)};
 
 	const buildQuote = () => {
-		let contactInfo = {
-			orderNumber: orderNumber,
-			requestDate: requestDate,
-			firstName: firstName,
-			lastName: lastName,
-			number: phone,
-			email: email,
-			street: street,
-			city: city,
-			state: state,
-			zip: zip
-		}
-		props.contactCreatorAction(contactInfo);
+
+		let customer = new Customer(firstName, lastName, phone, email, street, city, state, zip);
+		let quote = new Quote(orderNumber, requestDate, customer, props.quote?.dealer, props.quote?.pool, props.quote?.notes);
+
+		props.quoteUpdateAction(quote);
 	}
 
 		return(
@@ -184,7 +177,7 @@ const QuoteComponent = (props) => {
 					<Divider/>
 
 					<GridRow centered>
-						<PoolComponent/>
+						<QuoteFormComponent/>
 					</GridRow>
 
 					<GridRow centered>
@@ -194,7 +187,7 @@ const QuoteComponent = (props) => {
 				</Grid>
 					
 				<Segment inverted padded textAlign='center'>
-					<Link to="/quote"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
+					<Link to="/review"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
 				</Segment>
 			</Segment>
 			
