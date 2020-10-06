@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { Button, Divider, Grid, GridRow, Header, Segment } from 'semantic-ui-react';
+import { Button, Divider, Grid, GridRow, Segment } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
 
 const mapStateToProps = (state) => {
