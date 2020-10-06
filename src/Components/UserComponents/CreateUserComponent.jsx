@@ -73,7 +73,7 @@ const CreateUserComponent = (props) => {
 	}
 
 	const signUp = async () => {
-		if(password == passwordTwo){
+		if(password === passwordTwo){
 			let selectedDealer = await getDealerByName(dealer);
 			props.createUserAction(email, password, role, selectedDealer);
 		}
