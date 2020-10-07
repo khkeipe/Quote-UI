@@ -6,7 +6,8 @@ import { SUCCESSFUL_LOGIN,
 	SUCCESSFUL_QUOTE_CREATION, 
 	SUCCESSFUL_DEALER_CREATION,
 	QUOTE_UPDATE, 
-	USER_UPDATE
+	USER_UPDATE,
+	DEALER_UPDATE
 	} from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
@@ -122,6 +123,13 @@ export const userUpdateAction = (user) => async (dispatch) => {
 	dispatch({
 		type: USER_UPDATE,
 		payload: user
+	});
+}
+
+export const dealerUpdateAction = (dealer) => async (dispatch) => {
+	dispatch({
+		type: DEALER_UPDATE,
+		payload: dealer
 	});
 }
 
