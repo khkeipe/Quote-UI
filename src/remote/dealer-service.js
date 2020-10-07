@@ -26,3 +26,8 @@ export async function createNewDealer(newDealer) {
 	);
 	return response.data;
 }
+
+export async function getDealerById(id) {
+	let response = await client.get(`/dealers/${id}`);
+	return response.data;
+}
