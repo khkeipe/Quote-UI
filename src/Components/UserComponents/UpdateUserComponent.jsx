@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
+import { Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
 import { getAllDealers, getDealerByName } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
@@ -44,13 +44,6 @@ const UpdateUserComponent = (props) => {
 		}
 		fetchDealers();
 	},[dealerList])
-
-	// window.onkeypress = (event) => {
-	// 	let key = event.key.toUpperCase();
-	// 	if(key === 'ENTER' && Modal.open === true) {
-	// 		signUp();	
-	// 	}
-	// }
 
 	let updateEmail = (e) => {
 		setEmail(e.target.value);
