@@ -7,7 +7,8 @@ import { getAllDealers, getDealerByName } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
-			 errorMessage: state.userReducer.errorMessage }
+			 errorMessage: state.userReducer.errorMessage,
+			 }
 };
 
 const mapDispatchToProps = {
