@@ -13,6 +13,7 @@ import ViewDealerComponent from './Components/DealerComponents/ViewDealerCompone
 import PoolFormComponent from './Components/PoolComponent/PoolFormComponent';
 import DealerFormComponent from './Components/DealerComponents/DealerFormComponent';
 import UpdateUserComponent from './Components/UserComponents/UpdateUserComponent';
+import UpdateDealerComponent from './Components/DealerComponents/UpdateDealerComponent';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 				<Route path="/user-form" render={() => <CreateUserComponent/> } />
 				<Route path="/user-update" render={() => <UpdateUserComponent/> } />
 				<Route path="/dealer-form" render={() => <DealerFormComponent/> } />
+				<Route path="/dealer-update" render={() => <UpdateDealerComponent/> } />
 				<Route path="/pool-form" render={() => <PoolFormComponent/> } />
 				<Route path="/quote-form" render={() => <QuoteComponent/> } />
 				<Route path="/review" render={() => <QuoteInfoComponent/> } />
