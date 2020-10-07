@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment, Table, TableRow } from 'semantic-ui-react';
 import { getAllUsers, getUserById } from '../../remote/user-service';
 import { userUpdateAction } from '../../actions/action-creators';
@@ -18,13 +18,17 @@ const MapDispatchToProps = {
 
 const ViewUserComponent = (props) => {
 
+	let history = useHistory();
+
 	const [users, setUsers] = useState([]);
 
 	const getUserInfo = async (e) => {
 		const tableId = e.target.id;
 		console.log('Update user with id: ' + tableId);
-		let selectedUser = getUserById(tableId);
-		userUpdateAction(selectedUser);
+		let selectedUser = await getUserById(tableId);
+		props.userUpdateAction(selectedUser);
+		
+		history.push('/user-update');
 	}
 
 	useEffect(() => {
@@ -49,8 +53,8 @@ const ViewUserComponent = (props) => {
 
 								</CardContent>
 								<CardContent textAlign='center'>
-									<Link> <Button id={nextUser.key} onClick={getUserInfo} basic color='yellow'> Update </Button> </Link>
-									<Link> <Button basic color='red'> Delete </Button> </Link>
+									<Button id={nextUser.key} onClick={getUserInfo} basic color='yellow'> Update </Button>
+									<Button basic color='red'> Delete </Button>
 								</CardContent>
 							</Card>
 						</TableRow>
