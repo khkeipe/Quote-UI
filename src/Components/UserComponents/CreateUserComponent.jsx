@@ -24,6 +24,7 @@ const CreateUserComponent = (props) => {
 	const [dealer, setDealer] = useState('');
 	const [dealerList, setDealersList] = useState([]);
 	const [role, setRole] = useState('');
+	const [dealerID, setDealerID] = useState('');
 
 	const roleList = [
 		{key: 'Admin', text: 'Admin', value: 'Admin'}, 
@@ -75,8 +76,7 @@ const CreateUserComponent = (props) => {
 
 	const signUp = async () => {
 		if(password === passwordTwo){
-			let selectedDealer = await getDealerByName(dealer);
-			props.createUserAction(email, password, role, selectedDealer);
+			props.createUserAction(email, password, role, dealerID);
 		}
 	}
 

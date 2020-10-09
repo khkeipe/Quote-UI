@@ -53,7 +53,7 @@ const DashboardComponent = (props) => {
 						</GridRow>
 						<Divider/>
 						<GridRow centered>
-							<Link to="/dealer-form"> <Button color="black" size="huge">Add Pool</Button> </Link>
+							<Link to="/pool-form"> <Button color="black" size="huge">Add Pool</Button> </Link>
 							<Link to="/pools"> <Button color='black' size="huge">View Pools</Button> </Link>
 						</GridRow>
 					</>
