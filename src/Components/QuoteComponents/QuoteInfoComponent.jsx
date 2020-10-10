@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Header, Segment, Grid, GridRow, GridColumn, Button, Message } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { quoteCreatorAction } from '../../actions/action-creators';
 
 const MapStateToProps = (state) => {
@@ -72,7 +72,7 @@ const QuoteInfoComponent = (props) => {
 
 					<Segment inverted textAlign='center' padded>
 						<Link to="/quote-form"><Button inverted color='grey'> Back</Button></Link>
-						{ props.errorMessage | submitted == true ?
+						{ props.errorMessage | submitted === true ?
 						<Button disabled inverted color='grey'> Submit</Button> :
 						<Button onClick={createQuote} inverted color='grey'> Submit</Button> }
 					</Segment>

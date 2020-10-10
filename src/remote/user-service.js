@@ -8,11 +8,12 @@ export async function getAllUsers() {
 	return response.data;
 }
 
-export async function createNewUser(email, password, passwordVerification) {
+export async function createNewUser(email, password, role, dealerRep) {
 	let response = await client.post('/users', {
 		email: email,
 		password: password,
-		passwordVerification: passwordVerification
+		role: role,
+		dealerRep: dealerRep
 	});
 	console.log(response.data);
 

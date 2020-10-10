@@ -6,6 +6,7 @@ import { SUCCESSFUL_SIGNUP,
 
 const initialState = {
 	authUser: null,
+	user: null,
 	errorMessage: ''
 }
 

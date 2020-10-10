@@ -1,18 +1,19 @@
 import React from 'react';
-import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Divider, Dropdown } from 'semantic-ui-react';
+import { Button, Input, Segment, Grid, GridRow, GridColumn, Header, Divider, Dropdown, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
-import QuoteFormComponent from '../QuoteComponents/QuoteFormComponent';
-import { quoteUpdateAction } from '../../actions/action-creators';
-import { Customer } from '../../dtos/Customer';
-import { Quote } from '../../dtos/Quote';
 
 const mapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quote: state.quoteReducer.quote
+		dealer: state.dealerReducer.dealer,
+		errorMessage: state.dealerReducer.errorMessage
 	}
+}
+
+const mapDispatchToProps = {
+	
 }
 
 const states = [
@@ -69,49 +70,32 @@ const states = [
 	{ key: 51, text: 'Wyoming', value: 'Wyoming' }
 ]
 
-const mapDispatchToProps = {
-	quoteUpdateAction
-}
-
 const input = {
 	'width': '100%',
 }
 
-const color = {
-	'color': 'black'
-}
+const UpdateDealerComponent = (props) => {
 
+	const [dealerName, setDealerName ] = useState(props?.dealer?.dealerName);
+	const [dealerCode, setDealerCode ] = useState(props?.dealer?.dealerCode);
+	const [phone, setPhone] = useState(props?.dealer?.phone);
+	const [email, setEmail] = useState(props?.dealer?.email);
+	const [street, setStreet] = useState(props?.dealer?.street);
+	const [city, setCity] = useState(props?.dealer?.city);
+	const [state, setState] = useState(props?.dealer?.state);
+	const [zip, setZip] = useState(props?.dealer?.zip);
 
-const QuoteComponent = (props) => {
-
-	const [firstName, setFirstName ] = useState(props.quote?.customer?.firstName);
-	const [lastName, setLastName ] = useState(props.quote?.customer?.lastName);
-	const [phone, setPhone] = useState(props.quote?.customer?.phone);
-	const [email, setEmail] = useState(props.quote?.customer?.email);
-	const [street, setStreet] = useState(props.quote?.customer?.street);
-	const [city, setCity] = useState(props.quote?.customer?.city);
-	const [state, setState] = useState(props.quote?.customer?.state);
-	const [zip, setZip] = useState(props.quote?.customer?.zip);
-	const [orderNumber, setOrderNumber] = useState(props.quote?.orderNumber);
-	const [requestDate, setRequestDate] = useState(props.quote?.requestDate);
-
-	const updateFirstName = (e) => { setFirstName(e.target.value); }
-	const updateLastName = (e) => {	setLastName(e.target.value); }
+	const updateDealerName = (e) => { setDealerName(e.target.value); }
+	const updateDealerCode = (e) => { setDealerCode(e.target.value); }
 	const updatePhone = (e) => { setPhone(e.target.value); }
 	const updateEmail = (e) => { setEmail(e.target.value); }
-	const updateOrder = (e) => { setOrderNumber(e.target.value); }
-	const updateDate = (e) =>  { setRequestDate(e.target.value); }
 	const updateStreet = (e) => {setStreet(e.target.value)};
 	const updateCity = (e) => {setCity(e.target.value)};
 	const updateZip = (e) => {setZip(e.target.value)};
 	const updateState = (e, data) => {setState(data.value)};
 
-	const buildQuote = () => {
-
-		let customer = new Customer(firstName, lastName, phone, email, street, city, state, zip);
-		let quote = new Quote(orderNumber, requestDate, customer, props.quote?.dealer, props.quote?.pool, props.quote?.notes);
-
-		props.quoteUpdateAction(quote);
+	const saveChanges= () => {
+		
 	}
 
 		return(
@@ -121,29 +105,19 @@ const QuoteComponent = (props) => {
 			<Segment raised>
 				<Grid padded="vertically">
 					<GridRow centered>
-						<Header size="huge">Quote Form</Header>
+						<Header size="huge">Update Dealer</Header>
 					</GridRow>
 					<Divider/>
+
 					<GridRow>
-						<GridColumn width='3'>
+						<GridColumn width='4'>
 							<div className="ui input" style={input}>
-								<input autoFocus tabIndex='1' placeholder='Order Number' value={orderNumber} onChange={updateOrder} />
+								<input tabIndex='3' fluid placeholder='Dealer Name' onChange={updateDealerName} value={dealerName}/>
 							</div>
 						</GridColumn>
-						<GridColumn width='10'/>
-						<GridColumn width='3'>
-							<Input tabIndex='2' type='date' label={{content:"Requested Date", color: 'grey'}} onChange={updateDate} value={requestDate} />
-						</GridColumn>
-						
-					</GridRow>
-
-					<GridRow>
-						<GridColumn width='4'>
-							<Input tabIndex='3' fluid placeholder='First Name' onChange={updateFirstName} value={firstName}/>
-						</GridColumn>
 
 						<GridColumn width='4'>
-							<Input tabIndex='4' fluid placeholder='Last Name' onChange={updateLastName} value={lastName}/>
+							<Input tabIndex='4' fluid placeholder='Dealer Code' onChange={updateDealerCode} value={dealerCode}/>
 						</GridColumn>
 
 						<GridColumn width='4'>
@@ -176,18 +150,11 @@ const QuoteComponent = (props) => {
 
 					<Divider/>
 
-					<GridRow centered>
-						<QuoteFormComponent/>
-					</GridRow>
-
-					<GridRow centered>
-						Pool Image Will Go Here
-					</GridRow>
-
 				</Grid>
 					
 				<Segment inverted padded textAlign='center'>
-					<Link to="/review"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
+					<Button size="large" inverted color='black' onClick={saveChanges}> Save </Button>
+					{ props.errorMessage ? <Message negative> {props.errorMessage} </Message> : <></>}
 				</Segment>
 			</Segment>
 			
@@ -196,4 +163,4 @@ const QuoteComponent = (props) => {
 		)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuoteComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateDealerComponent);
