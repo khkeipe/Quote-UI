@@ -76,7 +76,7 @@ const PoolFormComponent = (props) => {
 			</GridRow>
 			
 		</Grid>
-		<Segment textAlign='center'>
+		<Segment inverted textAlign='center'>
 			<Button inverted onClick={savePool}> Save </Button>
 		</Segment>
 	</>
