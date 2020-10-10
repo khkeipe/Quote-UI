@@ -1,12 +1,9 @@
 import React from 'react';
-import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label, Button } from 'semantic-ui-react';
+import { Dropdown, Input, Grid, GridRow, GridColumn, Label, Button, Segment } from 'semantic-ui-react';
 import { useState } from 'react';
-import { getAllDealers, getDealers } from '../../remote/dealer-service';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { quoteUpdateAction } from '../../actions/action-creators';
-import { Quote } from '../../dtos/Quote';
-import { Pool } from '../../dtos/Pool';
+import { createPool } from '../../remote/pool-service';
 
 const MapStateToProps = (state) => {
 	return {
@@ -30,6 +27,10 @@ const PoolFormComponent = (props) => {
 	const [length, setLength] = useState(props.quote?.length);
 	const [width, setWidth] = useState(props.quote?.width);
 	const [wallHeight, setWallHeight] = useState(props.quote?.wallHeight);
+
+	const savePool = () => {
+		createPool(length, width, wallHeight);
+	}
 	
 	const updateDropdown = (e, data) => {
 		switch(data.name) {
@@ -74,10 +75,11 @@ const PoolFormComponent = (props) => {
 				</GridColumn>
 
 			</GridRow>
-			<GridRow>
-				<Button> Save </Button>
-			</GridRow>
+			
 		</Grid>
+		<Segment>
+			<Button onClick={savePool}> Save </Button>
+		</Segment>
 	</>
 	)
 }
