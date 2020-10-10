@@ -39,7 +39,7 @@ const CreateUserComponent = (props) => {
 
 		let response = await getAllDealers();
 			for(let item of response) {
-				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
+				let nextDealer = {key: item.id, text:item.dealerName, value:item.id};
 				dealerArray.push(nextDealer);
 			}
 		
@@ -67,7 +67,8 @@ const CreateUserComponent = (props) => {
 	}
 
 	const updateDropdown = (e, data) => {
-		setDealer(data.value);
+		setDealer(data.text);
+		setDealerID(data.value)
 	}
 
 	const updateRole = (e, data) => {
