@@ -2,17 +2,16 @@ import React from 'react';
 import { Dropdown, Input, Grid, GridRow, GridColumn, Label, Button, Segment } from 'semantic-ui-react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { quoteUpdateAction } from '../../actions/action-creators';
 import { createPool } from '../../remote/pool-service';
 
 const MapStateToProps = (state) => {
 	return {
-		quote: state.quoteReducer.quote
+		pool: state.poolReducer.pool
 	}
 }
 
 const MapDispatchToProps = {
-	quoteUpdateAction
+	
 }
 
 const wallHeights = [
@@ -77,8 +76,8 @@ const PoolFormComponent = (props) => {
 			</GridRow>
 			
 		</Grid>
-		<Segment>
-			<Button onClick={savePool}> Save </Button>
+		<Segment textAlign='center'>
+			<Button inverted onClick={savePool}> Save </Button>
 		</Segment>
 	</>
 	)
