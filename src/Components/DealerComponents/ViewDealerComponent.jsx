@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment, Table, TableRow } from 'semantic-ui-react';
+import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, GridRow, Message, Segment, Table, TableRow } from 'semantic-ui-react';
 import { getAllDealers, getDealerById } from '../../remote/dealer-service';
 import { dealerUpdateAction } from '../../actions/action-creators';
 
@@ -39,7 +39,15 @@ const ViewDealerComponent = (props) => {
 	
 			let response = await getAllDealers();
 				for(let dealer of response) {
-					let nextDealer = {key: dealer.id, name: dealer.dealerName};
+					let nextDealer = {key: dealer.id, 
+									name: dealer.dealerName, 
+									code: dealer.dealerCode,
+									city: dealer.cityName,
+									street: dealer.streetName,
+									state: dealer.stateName,
+									zip: dealer.zipCode,
+									phone: dealer.phoneNumber,
+									email: dealer.email};
 					dealerArray.push(
 						<TableRow>
 							<Card centered fluid>
@@ -47,10 +55,20 @@ const ViewDealerComponent = (props) => {
 									{nextDealer.name}
 								</CardHeader>
 								<CardMeta>
-									
+									{nextDealer.code}
 								</CardMeta>
 								<CardContent>
-
+									<Grid>
+										<GridRow>
+											Phone: {nextDealer.phone}
+										</GridRow>
+										<GridRow>
+											E-Mail: {nextDealer.email}
+										</GridRow>
+										<GridRow>
+											Address: {nextDealer.street} {nextDealer.city} {nextDealer.state} {nextDealer.zip}
+										</GridRow>
+									</Grid>
 								</CardContent>
 								<CardContent textAlign='center'>
 									<Button id={dealer.key} onClick={update} basic color='yellow'> Update </Button>
