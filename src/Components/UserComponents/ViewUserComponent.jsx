@@ -39,7 +39,7 @@ const ViewUserComponent = (props) => {
 	
 			let response = await getAllUsers();
 				for(let user of response) {
-					let nextUser = {key: user.id, email: user.email, role: user.role, dealer: user.dealer};
+					let nextUser = {key: user.id, email: user.email, role: user.role, dealer: user.dealerName};
 					userArray.push(
 						<TableRow >
 							<Card centered fluid>
@@ -47,10 +47,10 @@ const ViewUserComponent = (props) => {
 									{nextUser.email}
 								</CardHeader>
 								<CardMeta>
-									Role: {nextUser.role}
+									{nextUser.role}
 								</CardMeta>
 								<CardContent>
-
+									Dealer: {nextUser.dealer}
 								</CardContent>
 								<CardContent textAlign='center'>
 									<Button id={nextUser.key} onClick={getUserInfo} basic color='yellow'> Update </Button>
