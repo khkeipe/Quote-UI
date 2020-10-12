@@ -1,4 +1,5 @@
-import { SUCCESSFUL_SIGNUP, 
+import { SUCCESSFUL_SIGNUP,
+	SUCCESSFUL_USER_CREATION, 
 	FAILED_INVALID_REQUEST, 
 	FAILED_BAD_REQUEST, 
 	FAILED_INTERNAL_SERVER_ERROR, 
@@ -17,6 +18,11 @@ export const userReducer = (state = initialState, action) => {
 			return {
 				...state,
 				user: action.payload
+			}
+		case SUCCESSFUL_USER_CREATION:
+			return {
+				...state,
+				errorMessage: '',
 			}
 		case SUCCESSFUL_SIGNUP:
 			return {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { loginAction } from '../../actions/action-creators';
 import { createUserAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
-import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
-import { getAllDealers, getDealerByName } from '../../remote/dealer-service';
+import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown, ModalContent } from 'semantic-ui-react';
+import { getAllDealers } from '../../remote/dealer-service';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
@@ -12,7 +12,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-	loginAction,
 	createUserAction
 }
 
@@ -118,7 +117,31 @@ const CreateUserComponent = (props) => {
 				
 			</Grid>
 				<Segment inverted padded textAlign='center'>
-					<Button color='black' inverted size='large' onClick={signUp}> Save </Button>
+					<Modal
+					size='mini' 
+					trigger={<Button color='black' inverted size='large' onClick={signUp}> Save </Button>}>
+						<ModalContent>
+							{ props.errorMessage ? <>
+								<Grid>
+								<GridRow centered>
+									<Message error> {props?.errorMessage} </Message>
+								</GridRow>
+							</Grid>
+							</>
+							: <>
+							<Grid>
+								<GridRow centered>
+									<Message info> A new account has been created for {props?.user?.email} </Message>
+								</GridRow>
+								<GridRow centered>
+									<Link to='/dashboard'><Button color='black' size='mini'>Return to Dashboard</Button></Link>
+								</GridRow>
+							</Grid>
+							</> }
+						</ModalContent>
+					</Modal>
+
+					
 					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
 				</Segment>
 		</Segment>

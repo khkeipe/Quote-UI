@@ -9,14 +9,14 @@ import { SUCCESSFUL_LOGIN,
 	USER_UPDATE,
 	DEALER_UPDATE,
 	SUCCESSFUL_POOL_CREATION,
-	POOL_UPDATE
+	POOL_UPDATE,
+	SUCCESSFUL_USER_CREATION
 	} from "./action-types";
 
 import { authenticate } from '../remote/auth-service';
 import { createNewUser } from "../remote/user-service";
 import { saveQuote } from '../remote/quote-service';
 import { createNewDealer } from "../remote/dealer-service";
-import PoolFormComponent from "../Components/PoolComponent/PoolFormComponent";
 import { createPool } from "../remote/pool-service";
 
 export const loginAction = (email, password) => async (dispatch) => {
@@ -61,7 +61,7 @@ export const createUserAction = (email, password, role, dealer) => async (dispat
 	try {
 	let result = await createNewUser(email, password, role, dealer);
 	dispatch({
-		type: SUCCESSFUL_LOGIN,
+		type: SUCCESSFUL_USER_CREATION,
 		payload: result
 	});
 	} catch (e) {
