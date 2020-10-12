@@ -58,7 +58,7 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header>Dealer: {props.quote?.dealer?.dealerName}</Header>
+							<Header>Dealer: {props.quote?.quoteDealer}</Header>
 							<Header>Pool Type: {props.quote?.poolType}</Header>
 							<Header>Pool Size: {props.quote?.poolSize}</Header>
 							<Header>Custom Length: {props.quote?.length}</Header>
