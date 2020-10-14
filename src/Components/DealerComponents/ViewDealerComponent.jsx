@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, GridRow, Message, Segment, Table, TableRow } from 'semantic-ui-react';
 import { getAllDealers, getDealerById } from '../../remote/dealer-service';
 import { dealerUpdateAction } from '../../actions/action-creators';
@@ -85,7 +85,9 @@ const ViewDealerComponent = (props) => {
 	},[]);
 
 	return (
-		<>
+		<> 
+			{ !props.authUser ? <Redirect to='/home'/> 
+			: <>
 			<Grid>
 				<GridColumn width="3">
 				</GridColumn>
@@ -97,6 +99,7 @@ const ViewDealerComponent = (props) => {
 				<GridColumn width="3">
 				</GridColumn>
 			</Grid>
+			</>}
 		</>
 	)
 }
