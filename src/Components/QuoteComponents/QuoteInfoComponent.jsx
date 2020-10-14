@@ -35,9 +35,21 @@ const QuoteInfoComponent = (props) => {
 	return (
 		<>
 			<Segment raised padded>
+			<Grid centered divided="vertically" padded="vertically">
+					<GridRow>
+						<Header size="large">DEALER INFORMATION</Header>
+					</GridRow>
+					<GridRow>
+						<GridColumn>
+							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.authUser?.dealer?.phone} </Header></Header>
+							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.authUser?.dealer?.email} </Header></Header>
+							<Header textAlign="left">Address: <Header sub size='huge'>{props.authUser?.dealer?.street} {props.authUser?.dealer?.city}, {props.authUser?.dealer?.state} {props.authUser?.dealer?.zip}</Header></Header>
+						</GridColumn>
+					</GridRow>
+				</Grid>
 				<Grid centered divided="vertically" padded="vertically">
 					<GridRow>
-						<Header size="large">CONTACT INFORMATION</Header>
+						<Header size="large">CUSTOMER INFORMATION</Header>
 					</GridRow>
 					<GridRow>
 						<GridColumn>
