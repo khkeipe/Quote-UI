@@ -1,7 +1,7 @@
 import {
-	FAILED_INVALID_REQUEST, 
-	FAILED_BAD_REQUEST, 
-	FAILED_INTERNAL_SERVER_ERROR, 
+	DEALER_INVALID_REQUEST, 
+	DEALER_BAD_REQUEST, 
+	DEALER_INTERNAL_SERVER_ERROR, 
 	DEALER_UPDATE, SUCCESSFUL_DEALER_CREATION } from '../actions/action-types';
 
 const initialState = {
@@ -23,9 +23,9 @@ export const dealerReducer = (state = initialState, action) => {
 				dealer: action.payload,
 				errorMessage: ''
 			}
-		case FAILED_INVALID_REQUEST:
-		case FAILED_BAD_REQUEST:
-		case FAILED_INTERNAL_SERVER_ERROR:
+		case DEALER_INVALID_REQUEST:
+		case DEALER_BAD_REQUEST:
+		case DEALER_INTERNAL_SERVER_ERROR:
 			return {
 				...state,
 				errorMessage: action.payload

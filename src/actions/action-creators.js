@@ -1,7 +1,19 @@
 import { SUCCESSFUL_LOGIN, 
-	FAILED_BAD_REQUEST, 
-	FAILED_INVALID_REQUEST, 
-	FAILED_INTERNAL_SERVER_ERROR, 
+	LOGIN_BAD_REQUEST, 
+	LOGIN_INVALID_REQUEST, 
+	LOGIN_INTERNAL_SERVER_ERROR,
+	POOL_BAD_REQUEST, 
+	POOL_INVALID_REQUEST, 
+	POOL_INTERNAL_SERVER_ERROR, 
+	USER_BAD_REQUEST, 
+	USER_INVALID_REQUEST, 
+	USER_INTERNAL_SERVER_ERROR, 
+	DEALER_BAD_REQUEST, 
+	DEALER_INVALID_REQUEST, 
+	DEALER_INTERNAL_SERVER_ERROR, 
+	QUOTE_BAD_REQUEST, 
+	QUOTE_INVALID_REQUEST, 
+	QUOTE_INTERNAL_SERVER_ERROR, 
 	SUCCESSFUL_LOGOUT, 
 	SUCCESSFUL_QUOTE_CREATION, 
 	SUCCESSFUL_DEALER_CREATION,
@@ -32,17 +44,17 @@ export const loginAction = (email, password) => async (dispatch) => {
 		let status = e.response?.status;
 		if(status === 400) {
 			dispatch({
-				type: FAILED_BAD_REQUEST,
+				type: LOGIN_BAD_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else if (status === 401) {
 			dispatch({
-				type: FAILED_INVALID_REQUEST,
+				type: LOGIN_INVALID_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else {
 			dispatch({
-				type: FAILED_INTERNAL_SERVER_ERROR,
+				type: LOGIN_INTERNAL_SERVER_ERROR,
 				payload: e.response?.data.message || 'Error: server could not be reached'
 			});
 		}
@@ -69,17 +81,17 @@ export const createUserAction = (email, password, role, dealer) => async (dispat
 		let status = e.response?.status;
 		if(status === 400) {
 			dispatch({
-				type: FAILED_BAD_REQUEST,
+				type: USER_BAD_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else if (status === 401) {
 			dispatch({
-				type: FAILED_INVALID_REQUEST,
+				type: USER_INVALID_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else {
 			dispatch({
-				type: FAILED_INTERNAL_SERVER_ERROR,
+				type: USER_INTERNAL_SERVER_ERROR,
 				payload: e.response?.data.message || 'Error: server could not be reached'
 			});
 		}
@@ -99,17 +111,17 @@ export const createDealerAction = (dealerName, dealerCode, phone, email, street,
 		let status = e.response?.status;
 		if(status === 400) {
 			dispatch({
-				type: FAILED_BAD_REQUEST,
+				type: DEALER_BAD_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else if (status === 401) {
 			dispatch({
-				type: FAILED_INVALID_REQUEST,
+				type: DEALER_INVALID_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else {
 			dispatch({
-				type: FAILED_INTERNAL_SERVER_ERROR,
+				type: DEALER_INTERNAL_SERVER_ERROR,
 				payload: e.response?.data.message || 'Error: server could not be reached'
 			});
 		}
@@ -128,17 +140,17 @@ export const createPoolAction = (length, width, wallHeight) => async (dispatch) 
 		let status = e.response?.status;
 		if(status === 400) {
 			dispatch({
-				type: FAILED_BAD_REQUEST,
+				type: POOL_BAD_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else if (status === 401) {
 			dispatch({
-				type: FAILED_INVALID_REQUEST,
+				type: POOL_INVALID_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else {
 			dispatch({
-				type: FAILED_INTERNAL_SERVER_ERROR,
+				type: POOL_INTERNAL_SERVER_ERROR,
 				payload: e.response?.data.message || 'Error: server could not be reached'
 			});
 		}
@@ -185,17 +197,17 @@ export const quoteCreatorAction = (quote) => async (dispatch) => {
 		let status = e.response?.status;
 		if(status === 400) {
 			dispatch({
-				type: FAILED_BAD_REQUEST,
+				type: QUOTE_BAD_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else if(status === 401) {
 			dispatch({
-				type: FAILED_INVALID_REQUEST,
+				type: QUOTE_INVALID_REQUEST,
 				payload: e.response?.data.message
 			});
 		} else {
 			dispatch({
-				type: FAILED_INTERNAL_SERVER_ERROR,
+				type: QUOTE_INTERNAL_SERVER_ERROR,
 				payload: e.response?.data.message || 'Error: server could not be reached'
 			});
 		}

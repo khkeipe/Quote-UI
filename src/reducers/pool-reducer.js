@@ -1,7 +1,7 @@
 import { SUCCESSFUL_POOL_CREATION, 
-	FAILED_INVALID_REQUEST, 
-	FAILED_BAD_REQUEST, 
-	FAILED_INTERNAL_SERVER_ERROR, 
+	POOL_INVALID_REQUEST, 
+	POOL_BAD_REQUEST, 
+	POOL_INTERNAL_SERVER_ERROR, 
 	POOL_UPDATE } from '../actions/action-types';
 
 const initialState = {
@@ -24,9 +24,9 @@ export const poolReducer = (state = initialState, action) => {
 				pool: action.payload,
 				errorMessage: ''
 			}
-		case FAILED_INVALID_REQUEST:
-		case FAILED_BAD_REQUEST:
-		case FAILED_INTERNAL_SERVER_ERROR:
+		case POOL_INVALID_REQUEST:
+		case POOL_BAD_REQUEST:
+		case POOL_INTERNAL_SERVER_ERROR:
 			return {
 				...state,
 				errorMessage: action.payload
