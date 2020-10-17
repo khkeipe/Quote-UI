@@ -8,7 +8,8 @@ const MapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
 		quote: state.quoteReducer.quote,
-		errorMessage: state.quoteReducer.errorMessage
+		errorMessage: state.quoteReducer.errorMessage,
+		dealer: state.dealerReducer.dealer
 	}
 }
 
@@ -41,9 +42,9 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.authUser?.dealer?.phone} </Header></Header>
-							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.authUser?.dealer?.email} </Header></Header>
-							<Header textAlign="left">Address: <Header sub size='huge'>{props.authUser?.dealer?.street} {props.authUser?.dealer?.city}, {props.authUser?.dealer?.state} {props.authUser?.dealer?.zip}</Header></Header>
+							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.dealer?.phoneNumber} </Header></Header>
+							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.authUser?.email} </Header></Header>
+							<Header textAlign="left">Address: <Header sub size='huge'>{props.dealer?.streetName} {props.dealer?.cityName}, {props.dealer?.stateName} {props.dealer?.zipCode}</Header></Header>
 						</GridColumn>
 					</GridRow>
 				</Grid>

@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { useState } from 'react';
 import QuoteFormComponent from '../QuoteComponents/QuoteFormComponent';
-import { quoteUpdateAction } from '../../actions/action-creators';
+import { quoteUpdateAction, dealerUpdateAction } from '../../actions/action-creators';
 import { Customer } from '../../dtos/Customer';
 import { Quote } from '../../dtos/Quote';
+import { getDealerById } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return {
 		authUser: state.loginReducer.authUser,
-		quote: state.quoteReducer.quote
+		quote: state.quoteReducer.quote,
+		dealer: state.dealerReducer.dealer
 	}
 }
 
@@ -70,7 +72,8 @@ const states = [
 ]
 
 const mapDispatchToProps = {
-	quoteUpdateAction
+	quoteUpdateAction,
+	dealerUpdateAction
 }
 
 const input = {
@@ -106,7 +109,11 @@ const QuoteComponent = (props) => {
 	const updateZip = (e) => {setZip(e.target.value)};
 	const updateState = (e, data) => {setState(data.value)};
 
-	const buildQuote = () => {
+	const buildQuote = async () => {
+
+		let dealer = await getDealerById(props.authUser?.dealerID);
+		console.log(dealer);
+		props.dealerUpdateAction(dealer);
 
 		let customer = new Customer(firstName, lastName, phone, email, street, city, state, zip);
 		let quote = new Quote(orderNumber, requestDate, customer, props.quote?.dealer, props.quote?.pool, props.quote?.notes);
@@ -174,17 +181,11 @@ const QuoteComponent = (props) => {
 						</GridColumn>
 					</GridRow>
 
-					<Divider/>
-
-					<GridRow centered>
-						<QuoteFormComponent/>
-					</GridRow>
-
-					<GridRow centered>
-						Pool Image Will Go Here
-					</GridRow>
-
 				</Grid>
+
+				<Segment padded textAlign='center'>
+					<QuoteFormComponent/>
+				</Segment>
 					
 				<Segment inverted padded textAlign='center'>
 					<Link to="/review"><Button size="large" inverted color='grey' onClick={buildQuote}>Review</Button></Link>
