@@ -21,8 +21,15 @@ export async function createNewDealer(newDealer) {
 		streetName: newDealer.street, 
 		cityName: newDealer.city, 
 		stateName: newDealer.state, 
-		zipCode: newDealer.zip
+		zipCode: newDealer.zip,
+		users: [],
+		quotes: []
 	}
 	);
+	return response.data;
+}
+
+export async function getDealerById(id) {
+	let response = await client.get(`/dealers/${id}`);
 	return response.data;
 }

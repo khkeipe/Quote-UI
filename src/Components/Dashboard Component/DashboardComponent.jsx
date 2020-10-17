@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { Button, Divider, Grid, GridRow, Header, Segment } from 'semantic-ui-react';
+import { Button, Divider, Grid, GridRow, Segment } from 'semantic-ui-react';
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
 
 const mapStateToProps = (state) => {
@@ -53,7 +53,7 @@ const DashboardComponent = (props) => {
 						</GridRow>
 						<Divider/>
 						<GridRow centered>
-							<Link to="/dealer-form"> <Button color="black" size="huge">Add Pool</Button> </Link>
+							<Link to="/pool-form"> <Button color="black" size="huge">Add Pool</Button> </Link>
 							<Link to="/pools"> <Button color='black' size="huge">View Pools</Button> </Link>
 						</GridRow>
 					</>

@@ -28,8 +28,8 @@ const ViewPoolComponent = () => {
 
 							</CardContent>
 							<CardContent textAlign='center'>
-								<Link> <Button basic color='yellow'> Update </Button> </Link>
-								<Link> <Button basic color='red'> Delete </Button> </Link>
+								<Button id={nextPool.key} basic color='yellow'> Update </Button>
+								<Button basic color='red'> Delete </Button>
 							</CardContent>
 						</Card>
 					)};

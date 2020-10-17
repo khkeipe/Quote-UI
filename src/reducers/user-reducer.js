@@ -1,11 +1,13 @@
-import { SUCCESSFUL_SIGNUP, 
-	FAILED_INVALID_REQUEST, 
-	FAILED_BAD_REQUEST, 
-	FAILED_INTERNAL_SERVER_ERROR, 
+import { SUCCESSFUL_SIGNUP,
+	SUCCESSFUL_USER_CREATION, 
+	USER_INVALID_REQUEST, 
+	USER_BAD_REQUEST, 
+	USER_INTERNAL_SERVER_ERROR, 
 	USER_UPDATE } from '../actions/action-types';
 
 const initialState = {
 	authUser: null,
+	user: null,
 	errorMessage: ''
 }
 
@@ -15,7 +17,13 @@ export const userReducer = (state = initialState, action) => {
 		case USER_UPDATE:
 			return {
 				...state,
-				user: action.payload
+				user: action.payload,
+				errorMessage: ''
+			}
+		case SUCCESSFUL_USER_CREATION:
+			return {
+				...state,
+				errorMessage: '',
 			}
 		case SUCCESSFUL_SIGNUP:
 			return {
@@ -23,9 +31,9 @@ export const userReducer = (state = initialState, action) => {
 				authUser: action.payload,
 				errorMessage: ''
 			}
-		case FAILED_INVALID_REQUEST:
-		case FAILED_BAD_REQUEST:
-		case FAILED_INTERNAL_SERVER_ERROR:
+		case USER_INVALID_REQUEST:
+		case USER_BAD_REQUEST:
+		case USER_INTERNAL_SERVER_ERROR:
 			return {
 				...state,
 				errorMessage: action.payload

@@ -1,46 +1,18 @@
 import React from 'react';
-import { Dropdown, Input, Checkbox, Grid, GridRow, GridColumn, Label } from 'semantic-ui-react';
+import { Dropdown, Input, Grid, GridRow, GridColumn, Label, Button, Segment } from 'semantic-ui-react';
 import { useState } from 'react';
-import { getAllDealers, getDealers } from '../../remote/dealer-service';
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { quoteUpdateAction } from '../../actions/action-creators';
-import { Quote } from '../../dtos/Quote';
-import { Pool } from '../../dtos/Pool';
+import { createPool } from '../../remote/pool-service';
 
 const MapStateToProps = (state) => {
 	return {
-		quote: state.quoteReducer.quote
+		pool: state.poolReducer.pool
 	}
 }
 
 const MapDispatchToProps = {
-	quoteUpdateAction
+	
 }
-
-const poolTypes = [
-	{ key: 1, text: '', value: '' },
-	{ key: 2, text: 'ADIRONDACK', value: 'ADIRONDACK' },
-	{ key: 3, text: 'CUSTOM FREEFORM', value: 'CUSTOM FREEFORM' },
-	{ key: 4, text: 'BLUE LAGOON', value: 'BLUE LAGOON' },
-	{ key: 5, text: 'EMERALD', value: 'EMERALD'},
-	{ key: 6, text: 'GARNET', value: 'GARNET'},
-	{ key: 7, text: 'GRECIAN', value: 'GRECIAN'},
-	{ key: 8, text: 'KIDNEY(FLATBACK)', value: 'KIDNEY(FLATBACK)'},
-	{ key: 9, text: 'MOUNTAIN LAKE', value: 'MOUNTAIN LAKE'},
-	{ key: 10, text: 'OVAL IN GROUND', value: 'OVAL IN GROUND'},
-	{ key: 11, text: 'OXBOW', value: 'OXBOW'},
-	{ key: 12, text: 'ROMAN END', value: 'ROMAN END' },
-	{ key: 13, text: 'TOPAZ', value: 'TOPAZ' },
-  ]
-
-const poolSizes = [
-	{ key: 1, text: '', value: '' },
-	{ key: 2, text: 'Size 1', value: 'Size 1' },
-	{ key: 3, text: 'Size 2', value: 'Size 2' },
-	{ key: 4, text: 'Size 3', value: 'Size 3' },
-	{ key: 5, text: 'Custom', value: 'Custom' },
-  ]
 
 const wallHeights = [
 	{ key: 1, text: '', value: '' },
@@ -51,50 +23,18 @@ const wallHeights = [
 
 const PoolFormComponent = (props) => {
 
-	const [dealer, setDealer] = useState(props.quote?.dealer?.dealerName);
-	const [poolSize, setPoolSize] = useState(props.quote?.poolSize);
 	const [length, setLength] = useState(props.quote?.length);
 	const [width, setWidth] = useState(props.quote?.width);
-	const [poolType, setPoolType] = useState(props.quote?.poolType);
 	const [wallHeight, setWallHeight] = useState(props.quote?.wallHeight);
-	const [skimmer, setSkimmer] = useState(props.quote?.skimmer);
-	const [ladder, setLadder] = useState(props.quote?.ladder);
-	const [dealers, setDealers] = useState([]);
 
-	
-	let pool = new Pool(poolType, length, width, wallHeight);
-	let notes = ''
-
-	let quote = new Quote(props.quote?.orderNumber, props.quote?.requestDate, props.quote?.customer, dealer, pool, notes);
-
-	let quoteInfo = {
-		dealer: dealer,
-		poolSize: poolSize,
-		length: length,
-		width: width,
-		poolType: poolType,
-		wallHeight: wallHeight,
-		skimmer: skimmer,
-		ladder: ladder,
+	const savePool = () => {
+		createPool(length, width, wallHeight);
 	}
 	
 	const updateDropdown = (e, data) => {
 		switch(data.name) {
-			case 'dealer': {
-				setDealer(data.value);
-				// props.quoteCreatorAction(quoteInfo);
-				break;
-			}
-			case 'poolSize': {
-				setPoolSize(data.value);
-				break;
-			}
 			case 'wallHeight': {
 				setWallHeight(data.value);
-				break;
-			}
-			case 'poolType': {
-				setPoolType(data.value);
 				break;
 			}
 			default: {
@@ -119,80 +59,26 @@ const PoolFormComponent = (props) => {
 		}
 	}
 
-	const updateCheckbox= (e) => {
-		switch(e.target.id) {
-			case 'skimmer': {
-				setSkimmer(!skimmer);
-				break;
-			}
-			case 'ladder': {
-				setLadder(!ladder);
-				break;
-			}
-			default: {
-				return;
-			}
-		}
-	}
-
-	useEffect(() => {
-	
-		const fetchDealers = async () => {
-
-		let dealerArray = [];
-
-		let response = await getAllDealers();
-			for(let item of response) {
-				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
-				dealerArray.push(nextDealer);
-			}
-		
-			setDealers(dealerArray);
-
-		}
-		fetchDealers();
-		props.quoteUpdateAction(quote);
-	},[dealer, poolSize, length, width, poolType, skimmer, ladder, wallHeight])
-
 	return(
 	<>
 		<Grid padded >
 			<GridRow >
-				<GridColumn width='4'>
-					<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealers} selection onChange={updateDropdown}/>
-				</GridColumn>
-				<GridColumn width='4'>
-					<Dropdown  fluid selection	placeholder="Pool Type" name="poolType" defaultValue={poolType} options={poolTypes} onChange={updateDropdown} />
-				</GridColumn>
-				<GridColumn width='4'>
-					<Dropdown fluid selection placeholder="Pool Size" name='poolSize' defaultValue={poolSize} options={poolSizes} onChange={updateDropdown} />
-					{ (poolSize == 'Custom') ? 
-					<>
+				<GridColumn width='6'>
 					<Input fluid placeholder="Length" id='length' label={{content:"FT", color: 'grey'}} labelPosition="right" value={length} onChange={updateInput}/>
+				</GridColumn>
+				<GridColumn width='6'>
 					<Input fluid placeholder="Width" id='width' label={{content:"FT", color: 'grey'}} labelPosition="right" value={width} onChange={updateInput}/>
-					</> 
-					: <> </> }
-					</GridColumn>
+				</GridColumn>
 				<GridColumn width='4'>
 					<Dropdown  fluid selection placeholder="Wall Height" name="wallHeight" defaultValue={wallHeight} options={wallHeights} onChange={updateDropdown}	/>
 				</GridColumn>
+
 			</GridRow>
-		
-			<GridRow>
-				<GridColumn textAlign='left' width='4'>
-					<Label color='grey'>Additional Options</Label>
-					<GridRow>
-						<Checkbox id='skimmer' label="Skimmer" checked={skimmer} onChange={updateCheckbox}/>
-					</GridRow>	
-					<GridRow>
-						<Checkbox id='ladder' label="Wall Ladder" checked={ladder} onChange={updateCheckbox}/>
-					</GridRow>	
-					<GridRow>
-						<Checkbox label="...etc" />
-					</GridRow>	
-				</GridColumn>
-			</GridRow>
+			
 		</Grid>
+		<Segment inverted textAlign='center'>
+			<Button inverted onClick={savePool}> Save </Button>
+		</Segment>
 	</>
 	)
 }

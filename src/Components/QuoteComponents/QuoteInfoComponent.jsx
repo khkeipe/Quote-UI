@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Header, Segment, Grid, GridRow, GridColumn, Button, Message } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { quoteCreatorAction } from '../../actions/action-creators';
 
 const MapStateToProps = (state) => {
@@ -35,9 +35,21 @@ const QuoteInfoComponent = (props) => {
 	return (
 		<>
 			<Segment raised padded>
+			<Grid centered divided="vertically" padded="vertically">
+					<GridRow>
+						<Header size="large">DEALER INFORMATION</Header>
+					</GridRow>
+					<GridRow>
+						<GridColumn>
+							<Header textAlign="left">Phone Number: <Header sub size='huge'>{props.authUser?.dealer?.phone} </Header></Header>
+							<Header textAlign="left">E-mail: <Header sub size='huge'>{props.authUser?.dealer?.email} </Header></Header>
+							<Header textAlign="left">Address: <Header sub size='huge'>{props.authUser?.dealer?.street} {props.authUser?.dealer?.city}, {props.authUser?.dealer?.state} {props.authUser?.dealer?.zip}</Header></Header>
+						</GridColumn>
+					</GridRow>
+				</Grid>
 				<Grid centered divided="vertically" padded="vertically">
 					<GridRow>
-						<Header size="large">CONTACT INFORMATION</Header>
+						<Header size="large">CUSTOMER INFORMATION</Header>
 					</GridRow>
 					<GridRow>
 						<GridColumn>
@@ -58,7 +70,7 @@ const QuoteInfoComponent = (props) => {
 					</GridRow>
 					<GridRow>
 						<GridColumn>
-							<Header>Dealer: {props.quote?.dealer?.dealerName}</Header>
+							<Header>Dealer: {props.quote?.quoteDealer}</Header>
 							<Header>Pool Type: {props.quote?.poolType}</Header>
 							<Header>Pool Size: {props.quote?.poolSize}</Header>
 							<Header>Custom Length: {props.quote?.length}</Header>
@@ -72,7 +84,7 @@ const QuoteInfoComponent = (props) => {
 
 					<Segment inverted textAlign='center' padded>
 						<Link to="/quote-form"><Button inverted color='grey'> Back</Button></Link>
-						{ props.errorMessage | submitted == true ?
+						{ props.errorMessage | submitted === true ?
 						<Button disabled inverted color='grey'> Submit</Button> :
 						<Button onClick={createQuote} inverted color='grey'> Submit</Button> }
 					</Segment>

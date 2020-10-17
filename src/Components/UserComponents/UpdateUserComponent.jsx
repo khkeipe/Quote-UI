@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { createUserAction, userUpdateAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
-import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown, ModalContent } from 'semantic-ui-react';
-import { getAllDealers } from '../../remote/dealer-service';
-import { Link } from 'react-router-dom';
+import { Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown } from 'semantic-ui-react';
+import { getAllDealers, getDealerByName } from '../../remote/dealer-service';
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,
 			 errorMessage: state.userReducer.errorMessage,
-			 }
+			 user: state.userReducer.user }
 };
 
 const mapDispatchToProps = {
-	createUserAction,
-	userUpdateAction
+	
 }
 
-const CreateUserComponent = (props) => {
+const UpdateUserComponent = (props) => {
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [passwordTwo, setPasswordTwo] = useState('');
-	const [dealer, setDealer] = useState('');
+	const [email, setEmail] = useState(props?.user?.email);
+	const [password, setPassword] = useState(props?.user?.password);
+	const [passwordTwo, setPasswordTwo] = useState(props?.user?.password);
+	const [dealer, setDealer] = useState(props?.user?.dealerName);
 	const [dealerList, setDealersList] = useState([]);
-	const [role, setRole] = useState('');
-	const [dealerID, setDealerID] = useState('');
+	const [role, setRole] = useState(props?.user?.role);
 
 	const roleList = [
 		{key: 'Admin', text: 'Admin', value: 'Admin'}, 
@@ -39,7 +35,7 @@ const CreateUserComponent = (props) => {
 
 		let response = await getAllDealers();
 			for(let item of response) {
-				let nextDealer = {key: item.id, text:item.dealerName, value:item.id};
+				let nextDealer = {key: item.id, text:item.dealerName, value:item.dealerName};
 				dealerArray.push(nextDealer);
 			}
 		
@@ -48,13 +44,6 @@ const CreateUserComponent = (props) => {
 		}
 		fetchDealers();
 	},[dealerList])
-
-	window.onkeypress = (event) => {
-		let key = event.key.toUpperCase();
-		if(key === 'ENTER' && Modal.open === true) {
-			signUp();	
-		}
-	}
 
 	let updateEmail = (e) => {
 		setEmail(e.target.value);
@@ -67,17 +56,17 @@ const CreateUserComponent = (props) => {
 	}
 
 	const updateDropdown = (e, data) => {
-		setDealer(data.text);
-		setDealerID(data.value)
+		setDealer(data.value);
 	}
 
 	const updateRole = (e, data) => {
 		setRole(data.value);
 	}
 
-	const signUp = async () => {
+	const update = async () => {
 		if(password === passwordTwo){
-			props.createUserAction(email, password, role, dealerID);
+			let selectedDealer = await getDealerByName(dealer);
+			// Send PUT Request here to update user
 		}
 	}
 
@@ -90,7 +79,7 @@ const CreateUserComponent = (props) => {
 		<Segment>
 			<Grid>
 				<GridRow centered>
-					<Header as="h1" > Add User </Header>
+					<Header as="h1" > Update User </Header>
 				</GridRow>
 				<Divider/>
 				<GridRow>
@@ -118,31 +107,7 @@ const CreateUserComponent = (props) => {
 				
 			</Grid>
 				<Segment inverted padded textAlign='center'>
-					<Modal
-					size='mini' 
-					trigger={<Button color='black' inverted size='large' onClick={signUp}> Save </Button>}>
-						<ModalContent>
-							{ props.errorMessage ? <>
-								<Grid>
-								<GridRow centered>
-									<Message error> {props?.errorMessage} </Message>
-								</GridRow>
-							</Grid>
-							</>
-							: <>
-							<Grid>
-								<GridRow centered>
-									<Message info> A new account has been created for {props?.user?.email} </Message>
-								</GridRow>
-								<GridRow centered>
-									<Link to='/dashboard'><Button color='black' size='mini'>Return to Dashboard</Button></Link>
-								</GridRow>
-							</Grid>
-							</> }
-						</ModalContent>
-					</Modal>
-
-					
+					<Button color='black' inverted size='large' onClick={update}> Save </Button>
 					{props.errorMessage ? <Message negative>{props.errorMessage}</Message> : <></> }
 				</Segment>
 		</Segment>
@@ -150,4 +115,4 @@ const CreateUserComponent = (props) => {
 	)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUserComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateUserComponent);

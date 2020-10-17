@@ -1,4 +1,4 @@
-import { SUCCESSFUL_QUOTE_CREATION, FAILED_BAD_REQUEST, FAILED_INTERNAL_SERVER_ERROR, FAILED_INVALID_REQUEST, QUOTE_UPDATE } from "../actions/action-types"
+import { SUCCESSFUL_QUOTE_CREATION, QUOTE_BAD_REQUEST, QUOTE_INTERNAL_SERVER_ERROR, QUOTE_INVALID_REQUEST, QUOTE_UPDATE } from "../actions/action-types"
 
 const initialState = {
 		quote: {},
@@ -21,9 +21,9 @@ export const quoteReducer = (state = initialState, action) => {
 				errorMessage: ''
 			}
 		}
-		case FAILED_INVALID_REQUEST:
-		case FAILED_BAD_REQUEST:
-		case FAILED_INTERNAL_SERVER_ERROR:
+		case QUOTE_INVALID_REQUEST:
+		case QUOTE_BAD_REQUEST:
+		case QUOTE_INTERNAL_SERVER_ERROR:
 			return {
 				...state,
 				errorMessage: action.payload

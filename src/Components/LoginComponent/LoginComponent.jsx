@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, FormButton, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow, GridColumn } from 'semantic-ui-react';
+import { Modal, Button, Form, Message, Grid, FormField, Input, ModalContent, ModalHeader, GridRow } from 'semantic-ui-react';
 import { loginAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader';
-import CreateUserComponent from '../UserComponents/CreateUserComponent';
+
 
 const mapStateToProps = (state) => {
 	return { authUser: state.loginReducer.authUser,

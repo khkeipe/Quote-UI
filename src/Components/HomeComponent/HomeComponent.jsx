@@ -20,7 +20,7 @@ const HomeComponent = (props) => {
 	return (
 		<>
 			<Segment textAlign="center" size="large" vertical padded="very">
-				<Header as="h1" style={headerMain}>Radiant Pool Quote Creator</Header>
+				<Header as="h1" style={headerMain}>The Pool Quote Creator</Header>
 				{props.authUser ? 
 				<>
 					<Redirect to='/dashboard'/>

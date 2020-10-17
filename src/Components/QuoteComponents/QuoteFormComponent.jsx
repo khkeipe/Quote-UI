@@ -10,6 +10,7 @@ import { Pool } from '../../dtos/Pool';
 
 const MapStateToProps = (state) => {
 	return {
+		authUser: state.loginReducer.authUser,
 		quote: state.quoteReducer.quote
 	}
 }
@@ -51,7 +52,7 @@ const wallHeights = [
 
 const QuoteFormComponent = (props) => {
 
-	const [dealer, setDealer] = useState(props.quote?.dealer?.dealerName);
+	const [dealer, setDealer] = useState(props.authUser?.dealerName);
 	const [poolSize, setPoolSize] = useState(props.quote?.poolSize);
 	const [length, setLength] = useState(props.quote?.length);
 	const [width, setWidth] = useState(props.quote?.width);
@@ -66,23 +67,11 @@ const QuoteFormComponent = (props) => {
 	let notes = ''
 
 	let quote = new Quote(props.quote?.orderNumber, props.quote?.requestDate, props.quote?.customer, dealer, pool, notes);
-
-	let quoteInfo = {
-		dealer: dealer,
-		poolSize: poolSize,
-		length: length,
-		width: width,
-		poolType: poolType,
-		wallHeight: wallHeight,
-		skimmer: skimmer,
-		ladder: ladder,
-	}
 	
 	const updateDropdown = (e, data) => {
 		switch(data.name) {
 			case 'dealer': {
 				setDealer(data.value);
-				// props.quoteCreatorAction(quoteInfo);
 				break;
 			}
 			case 'poolSize': {
