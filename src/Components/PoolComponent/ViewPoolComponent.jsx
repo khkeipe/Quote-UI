@@ -30,7 +30,7 @@ const ViewPoolComponent = () => {
 								Wall Height: {nextPool.height}"
 							</CardContent>
 							<CardContent>
-								Hopper Dimension: {nextPool.hopperSize}'
+								Hopper Dimension: {nextPool.hopper}'
 							</CardContent>
 
 							<CardContent textAlign='center'>

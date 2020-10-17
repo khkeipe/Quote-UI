@@ -128,9 +128,9 @@ export const createDealerAction = (dealerName, dealerCode, phone, email, street,
 	}
 }
 
-export const createPoolAction = (length, width, wallHeight) => async (dispatch) => {
+export const createPoolAction = (poolType, poolCode, length, width, height, hopperSize) => async (dispatch) => {
 	try {
-		let result = await createPool(length, width, wallHeight);
+		let result = await createPool(poolType, poolCode, length, width, height, hopperSize);
 		dispatch({
 			type: SUCCESSFUL_POOL_CREATION,
 			payload: result
