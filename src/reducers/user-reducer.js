@@ -17,7 +17,8 @@ export const userReducer = (state = initialState, action) => {
 		case USER_UPDATE:
 			return {
 				...state,
-				user: action.payload
+				user: action.payload,
+				errorMessage: ''
 			}
 		case SUCCESSFUL_USER_CREATION:
 			return {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createUserAction } from '../../actions/action-creators';
+import { createUserAction, userUpdateAction } from '../../actions/action-creators';
 import { connect } from 'react-redux';
 import { Modal, Button, Input, Grid, GridRow, Message, Segment, Divider, GridColumn, Header, Dropdown, ModalContent } from 'semantic-ui-react';
 import { getAllDealers } from '../../remote/dealer-service';
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-	createUserAction
+	createUserAction,
+	userUpdateAction
 }
 
 const CreateUserComponent = (props) => {
