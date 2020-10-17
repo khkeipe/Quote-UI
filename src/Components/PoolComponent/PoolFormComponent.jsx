@@ -1,8 +1,9 @@
 import React from 'react';
-import { Dropdown, Input, Grid, GridRow, GridColumn, Label, Button, Segment } from 'semantic-ui-react';
+import { Input, Grid, GridRow, GridColumn, Button, Segment, Header } from 'semantic-ui-react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { createPool } from '../../remote/pool-service';
+import { createPoolAction } from '../../actions/action-creators';
 
 const MapStateToProps = (state) => {
 	return {
@@ -11,36 +12,20 @@ const MapStateToProps = (state) => {
 }
 
 const MapDispatchToProps = {
-	
+	createPoolAction
 }
-
-const wallHeights = [
-	{ key: 1, text: '', value: '' },
-	{ key: 2, text: '42"', value: '42"' },
-	{ key: 3, text: '48"', value: '48"' },
-	{ key: 4, text: '52"', value: '52"' },
-  ]
 
 const PoolFormComponent = (props) => {
 
-	const [length, setLength] = useState(props.quote?.length);
-	const [width, setWidth] = useState(props.quote?.width);
-	const [wallHeight, setWallHeight] = useState(props.quote?.wallHeight);
+	const [poolType, setPoolType] = useState(props.pool?.poolType);
+	const [poolCode, setPoolCode] = useState(props.pool?.poolCode);
+	const [length, setLength] = useState(props.pool?.length);
+	const [width, setWidth] = useState(props.pool?.width);
+	const [height, setHeight] = useState(props.pool?.height);
+	const [hopperSize, setHopperSize] = useState(props.pool?.hopperSize);
 
 	const savePool = () => {
-		createPool(length, width, wallHeight);
-	}
-	
-	const updateDropdown = (e, data) => {
-		switch(data.name) {
-			case 'wallHeight': {
-				setWallHeight(data.value);
-				break;
-			}
-			default: {
-				return;
-			}
-		}
+		props.createPoolAction(poolType, poolCode, length, width, height, hopperSize);
 	}
 
 	const updateInput = (e) => {
@@ -53,6 +38,26 @@ const PoolFormComponent = (props) => {
 				setWidth(e.target.value);
 				break;
 			}
+			case 'height': {
+				setHeight(e.target.value);
+				break;
+			}
+			case 'hopperSize': {
+				setHopperSize(e.target.value);
+				break;
+			}
+			case 'poolType': {
+				setPoolType(e.target.value);
+				break;
+			}
+			case 'poolCode': {
+				setPoolCode(e.target.value);
+				break;
+			}
+			case 'height': {
+				setHeight(e.target.value);
+				break;
+			}
 			default: {
 				return;
 			}
@@ -62,19 +67,31 @@ const PoolFormComponent = (props) => {
 	return(
 	<>
 		<Grid padded >
-			<GridRow >
-				<GridColumn width='6'>
-					<Input fluid placeholder="Length" id='length' label={{content:"FT", color: 'grey'}} labelPosition="right" value={length} onChange={updateInput}/>
+			<GridRow centered>
+					<Header as="h1" > Add Pool </Header>
+				</GridRow>
+			<GridRow centered>
+			<GridColumn width='10'>
+					<Input fluid placeholder="Pool Type" id='poolType' value={poolType} onChange={updateInput}/>
 				</GridColumn>
 				<GridColumn width='6'>
+					<Input fluid placeholder="Pool Code" id='poolCode' value={poolCode} onChange={updateInput}/>
+				</GridColumn>
+			</GridRow>
+			<GridRow centered>
+				<GridColumn width='4'>
+					<Input fluid placeholder="Length" id='length' label={{content:"FT", color: 'grey'}} labelPosition="right" value={length} onChange={updateInput}/>
+				</GridColumn>
+				<GridColumn width='4'>
 					<Input fluid placeholder="Width" id='width' label={{content:"FT", color: 'grey'}} labelPosition="right" value={width} onChange={updateInput}/>
 				</GridColumn>
 				<GridColumn width='4'>
-					<Dropdown  fluid selection placeholder="Wall Height" name="wallHeight" defaultValue={wallHeight} options={wallHeights} onChange={updateDropdown}	/>
+					<Input  fluid placeholder="Wall Height" id="height" label={{content:"IN", color: 'grey'}} labelPosition="right" value={height} onChange={updateInput}	/>
 				</GridColumn>
-
+				<GridColumn width='4'>
+					<Input  fluid placeholder="Hopper Size" id="hopperSize" label={{content:"FT", color: 'grey'}} labelPosition="right" value={hopperSize} onChange={updateInput}	/>
+				</GridColumn>
 			</GridRow>
-			
 		</Grid>
 		<Segment inverted textAlign='center'>
 			<Button inverted onClick={savePool}> Save </Button>

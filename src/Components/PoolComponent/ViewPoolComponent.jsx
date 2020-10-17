@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMeta, Grid, GridColumn, Message, Segment } from 'semantic-ui-react';
 import { getAllPools } from '../../remote/pool-service';
 
@@ -15,18 +14,25 @@ const ViewPoolComponent = () => {
 	
 			let response = await getAllPools();
 				for(let pool of response) {
-					let nextPool = {key: pool.id, size: pool.size};
+					let nextPool = {key: pool.id, type: pool.poolType, code: pool.poolCode, length: pool.length, width: pool.width, height: pool.height, hopper: pool.hopperSize};
 					poolArray.push(
 						<Card centered fluid>
 							<CardHeader as='h2'>
-								{nextPool.size}
+								{nextPool.type}
 							</CardHeader>
 							<CardMeta>
-								
+								{nextPool.code}
 							</CardMeta>
 							<CardContent>
-
+								Dimensions: {nextPool.length}" x {nextPool.width}"
 							</CardContent>
+							<CardContent>
+								Wall Height: {nextPool.height}"
+							</CardContent>
+							<CardContent>
+								Hopper Dimension: {nextPool.hopperSize}'
+							</CardContent>
+
 							<CardContent textAlign='center'>
 								<Button id={nextPool.key} basic color='yellow'> Update </Button>
 								<Button basic color='red'> Delete </Button>

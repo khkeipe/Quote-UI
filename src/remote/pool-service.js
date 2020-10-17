@@ -6,11 +6,14 @@ export async function getAllPools() {
 	return response.data;
 }
 
-export async function createPool(length, width, wallHeight) {
+export async function createPool(poolType, poolCode, length, width, height, hopperSize) {
 	let response = await client.post('/pools', {
+		poolType: poolType,
+		poolCode: poolCode,
 		length: length, 
 		width: width, 
-		wallHeight: wallHeight
+		height: height,
+		hopperSize: hopperSize
 	});
 	return response.data;
 }
