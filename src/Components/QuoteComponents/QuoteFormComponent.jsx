@@ -145,8 +145,8 @@ const QuoteFormComponent = (props) => {
 
 	return(
 	<>
-		<Grid padded >
-			<GridRow >
+		<Grid padded container>
+			<GridRow  centered>
 				<GridColumn width='4'>
 					<Dropdown fluid name="dealer" placeholder="Dealer" defaultValue={dealer} options={dealers} selection onChange={updateDropdown}/>
 				</GridColumn>

@@ -166,7 +166,7 @@ const QuoteComponent = (props) => {
 						</GridColumn>
 
 						<GridColumn width='3'>
-							<Dropdown fluid name="State" placeholder="State" defaultValue={state} options={states} search selection onChange={updateState}/>
+							<Dropdown fluid tabIndex='9' name="State" placeholder="State" defaultValue={state} options={states} search selection onChange={updateState}/>
 						</GridColumn>
 
 						<GridColumn width='4'>
